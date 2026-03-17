@@ -106,7 +106,7 @@ input, textarea { font-family: 'Nunito', sans-serif; }
   top: 0; left: 0; right: 0; bottom: 0;
   background: rgba(30,58,95,0.7);
   z-index: 500;
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: center;
   padding: 20px;
@@ -1169,10 +1169,14 @@ input, textarea { font-family: 'Nunito', sans-serif; }
   inset: 0;
   background: var(--cream);
   z-index: 9999;
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: center;
   padding: 24px;
+}
+
+#pw-gate.active {
+  display: flex;
 }
 
 #pw-card {
@@ -1546,3 +1550,5 @@ button:focus-visible {
   #s35 { display: flex !important; }
   .parent-print-btn { display: none !important; }
 }
+
+#resume-banner.active { display: flex; }

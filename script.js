@@ -843,19 +843,19 @@ function showResumeBanner(savedScreen) {
   const banner = document.getElementById('resume-banner');
   const msg = document.getElementById('resume-msg');
   if (!banner) return;
-  if (msg) msg.textContent = 'You were on Screen ' + savedScreen + ' of 34. Pick up where you left off?';
-  banner.style.display = 'flex';
+  if (msg) msg.textContent = 'You were on Screen ' + savedScreen + ' of 35. Pick up where you left off?';
+  banner.classList.add('active');
 }
 
 function resumeSession() {
   const banner = document.getElementById('resume-banner');
-  if (banner) banner.style.display = 'none';
+  if (banner) banner.classList.remove('active');
   navigateTo(S.current);
 }
 
 function restartSession() {
   const banner = document.getElementById('resume-banner');
-  if (banner) banner.style.display = 'none';
+  if (banner) banner.classList.remove('active');
   clearState();
   navigateTo(1);
 }
@@ -872,7 +872,8 @@ function checkPassword() {
   if (!input) return;
   if (input.value.trim() === PROGRAM_PASSWORD) {
     try { localStorage.setItem(PW_KEY, '1'); } catch(e) {}
-    document.getElementById('pw-gate').style.display = 'none';
+    const gate = document.getElementById('pw-gate');
+    if (gate) gate.classList.remove('active');
     launchProgram();
   } else {
     if (error) {
@@ -906,11 +907,12 @@ function launchProgram() {
 function init() {
   let unlocked = false;
   try { unlocked = localStorage.getItem(PW_KEY) === '1'; } catch(e) {}
+  const gate = document.getElementById('pw-gate');
   if (unlocked) {
-    document.getElementById('pw-gate').style.display = 'none';
+    if (gate) gate.classList.remove('active');
     launchProgram();
   } else {
-    document.getElementById('pw-gate').style.display = 'flex';
+    if (gate) gate.classList.add('active');
     const input = document.getElementById('pw-input');
     if (input) setTimeout(() => input.focus(), 100);
   }
