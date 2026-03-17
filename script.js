@@ -143,7 +143,7 @@ function saveState() {
   } catch(e) {
     console.warn('localStorage save failed:', e);
   }
-  showSaveIndicator();
+  if (typeof showSaveIndicator === 'function') showSaveIndicator();
 }
 
 function loadState() {
@@ -921,6 +921,37 @@ function init() {
 document.addEventListener('DOMContentLoaded', init);
 
 // ============================================================
+// EARLY HELPER FUNCTIONS (must be defined before first use)
+// ============================================================
+
+// (moved to early helpers section)
+// (moved to early helpers section)
+
+function showSaveIndicator() {
+  const el = document.getElementById('save-indicator');
+  if (!el) return;
+  el.classList.add('visible');
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(() => el.classList.remove('visible'), 2000);
+}
+
+// (moved to early helpers section)
+
+function showPhaseToast(screenNum) {
+  const data = PHASE_TOASTS[screenNum];
+  if (!data) return;
+  const el = document.getElementById('phase-toast');
+  if (!el) return;
+  el.innerHTML = data.emoji + ' ' + data.text;
+  el.classList.add('visible');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => el.classList.remove('visible'), 3500);
+}
+
+// (moved to early helpers section)
+
+
+// ============================================================
 // PROGRAM MENU — Confidence Spark Style
 // ============================================================
 
@@ -1018,16 +1049,9 @@ Object.assign(GATE_HINTS, {
   30: 'Write just a few words to your future self to continue.'
 });
 
-// saveState already calls showSaveIndicator above
-let saveTimer = null;
+// (moved to early helpers section)
 
-function showSaveIndicator() {
-  const el = document.getElementById('save-indicator');
-  if (!el) return;
-  el.classList.add('visible');
-  clearTimeout(saveTimer);
-  saveTimer = setTimeout(() => el.classList.remove('visible'), 2000);
-}
+// (moved to early helpers section)
 
 // ---- P6: Phase transition toasts ----
 const PHASE_TOASTS = {
@@ -1040,16 +1064,7 @@ const PHASE_TOASTS = {
 };
 
 let toastTimer = null;
-function showPhaseToast(screenNum) {
-  const data = PHASE_TOASTS[screenNum];
-  if (!data) return;
-  const el = document.getElementById('phase-toast');
-  if (!el) return;
-  el.innerHTML = data.emoji + ' ' + data.text;
-  el.classList.add('visible');
-  clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => el.classList.remove('visible'), 3500);
-}
+// (moved to early helpers section)
 
 // navigateTo already includes toast and counter calls above
 

@@ -865,7 +865,7 @@ input, textarea { font-family: 'Nunito', sans-serif; }
   #progress-wrap, #phase-label, #screen-num, #bottom-nav, #resume-banner { display: none !important; }
   body { background: white; }
   #screen-wrap { padding: 0; }
-  .screen { display: none !important; }
+  /* screen display controlled by .active class */
   #s34 { display: flex !important; }
   .cert-wrap { page-break-inside: avoid; }
   .benne-box, .print-btn { display: none !important; }
