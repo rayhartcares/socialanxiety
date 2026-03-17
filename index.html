@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Social Anxiety Lab — A brave kid's guide to feeling okay around people. By Brave Feelings Lab.">
+<title>Social Anxiety Lab — Brave Feelings Lab</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+
+<!-- HEADER -->
+<div id="sal-header">
+  <div id="header-title">Social Anxiety Lab <span id="header-icon">🧠</span></div>
+  <div id="header-center">
+    <button id="menu-btn" onclick="toggleMenu()" aria-label="Program Menu">&#9776;</button>
+    <span id="page-counter">Page <span id="page-num">1</span> of 34</span>
+    <div id="header-progress-wrap"><div id="header-progress-bar"></div></div>
+  </div>
+</div>
+
+<!-- PROGRAM MENU SIDEBAR -->
+<div id="menu-overlay" onclick="closeMenu()"></div>
+<div id="program-menu">
+  <div id="menu-header">
+    <div id="menu-title">Program Menu</div>
+    <button id="menu-close" onclick="closeMenu()">✕</button>
+  </div>
+  <div id="menu-goto-wrap">
+    <div class="menu-section-label">GO TO PAGE</div>
+    <select id="menu-goto-select">
+      <option value="1">Page 1 — Welcome to Social Anxiety Lab</option>
+      <option value="2">Page 2 — What's Your Name?</option>
+      <option value="3">Page 3 — The Brave Promise</option>
+      <option value="4">Page 4 — What Is Social Anxiety?</option>
+      <option value="5">Page 5 — You Are Not Alone</option>
+      <option value="6">Page 6 — Two Voices Inside You</option>
+      <option value="7">Page 7 — Where Do You Feel It?</option>
+      <option value="8">Page 8 — Your Anxiety Fingerprint</option>
+      <option value="9">Page 9 — What Triggers Your Worry?</option>
+      <option value="10">Page 10 — The Worry Loop</option>
+      <option value="11">Page 11 — Become a Thought Detective</option>
+      <option value="12">Page 12 — Catastrophe or Concern?</option>
+      <option value="13">Page 13 — The Spotlight Illusion</option>
+      <option value="14">Page 14 — Rewrite the Thought</option>
+      <option value="15">Page 15 — Why Calm Comes First</option>
+      <option value="16">Page 16 — Tool 1: Box Breathing</option>
+      <option value="17">Page 17 — Tool 2: 5-4-3-2-1 Ground</option>
+      <option value="18">Page 18 — Tool 3: Safe Sentence</option>
+      <option value="19">Page 19 — Toolkit Checkpoint</option>
+      <option value="20">Page 20 — What Is a Brave Step?</option>
+      <option value="21">Page 21 — Scenario: Raising Your Hand</option>
+      <option value="22">Page 22 — Scenario: Meeting Someone New</option>
+      <option value="23">Page 23 — Scenario: Feeling Left Out</option>
+      <option value="24">Page 24 — Scenario: Making a Mistake</option>
+      <option value="25">Page 25 — Build Your Brave Ladder</option>
+      <option value="26">Page 26 — Your First Brave Step</option>
+      <option value="27">Page 27 — The Friendship Truth</option>
+      <option value="28">Page 28 — Conversation Starters</option>
+      <option value="29">Page 29 — When to Ask for Help</option>
+      <option value="30">Page 30 — A Note to Yourself</option>
+      <option value="31">Page 31 — Your Brave Check-In</option>
+      <option value="32">Page 32 — What You've Learned</option>
+      <option value="33">Page 33 — Journey Complete</option>
+      <option value="34">Page 34 — Your Certificate</option>
+    </select>
+    <button id="menu-goto-btn" onclick="menuGoTo()">Go</button>
+  </div>
+  <div id="menu-journey">
+    <div class="menu-section-label">SOCIAL ANXIETY LAB JOURNEY</div>
+    <div class="menu-phase-header"><span class="menu-phase-name">Phase 0 · Getting Started</span><span class="menu-phase-status" id="mps-0">IN PROGRESS</span></div>
+    <div class="menu-item" data-screen="1"  onclick="menuNav(1)">Welcome to Social Anxiety Lab</div>
+    <div class="menu-item" data-screen="2"  onclick="menuNav(2)">What's Your Name?</div>
+    <div class="menu-item" data-screen="3"  onclick="menuNav(3)">The Brave Promise</div>
+    <div class="menu-phase-header"><span class="menu-phase-name">Phase 1 · Understanding</span><span class="menu-phase-status" id="mps-1">NOT STARTED</span></div>
+    <div class="menu-item" data-screen="4"  onclick="menuNav(4)">What Is Social Anxiety?</div>
+    <div class="menu-item" data-screen="5"  onclick="menuNav(5)">You Are Not Alone</div>
+    <div class="menu-item" data-screen="6"  onclick="menuNav(6)">Two Voices Inside You</div>
+    <div class="menu-item" data-screen="7"  onclick="menuNav(7)">Where Do You Feel It?</div>
+    <div class="menu-item" data-screen="8"  onclick="menuNav(8)">Your Anxiety Fingerprint</div>
+    <div class="menu-item" data-screen="9"  onclick="menuNav(9)">What Triggers Your Worry?</div>
+    <div class="menu-phase-header"><span class="menu-phase-name">Phase 2 · Thought Traps</span><span class="menu-phase-status" id="mps-2">NOT STARTED</span></div>
+    <div class="menu-item" data-screen="10" onclick="menuNav(10)">The Worry Loop</div>
+    <div class="menu-item" data-screen="11" onclick="menuNav(11)">Become a Thought Detective</div>
+    <div class="menu-item" data-screen="12" onclick="menuNav(12)">Catastrophe or Concern?</div>
+    <div class="menu-item" data-screen="13" onclick="menuNav(13)">The Spotlight Illusion</div>
+    <div class="menu-item" data-screen="14" onclick="menuNav(14)">Rewrite the Thought</div>
+    <div class="menu-phase-header"><span class="menu-phase-name">Phase 3 · Calm Toolkit</span><span class="menu-phase-status" id="mps-3">NOT STARTED</span></div>
+    <div class="menu-item" data-screen="15" onclick="menuNav(15)">Why Calm Comes First</div>
+    <div class="menu-item" data-screen="16" onclick="menuNav(16)">Tool 1: Box Breathing</div>
+    <div class="menu-item" data-screen="17" onclick="menuNav(17)">Tool 2: 5-4-3-2-1 Ground</div>
+    <div class="menu-item" data-screen="18" onclick="menuNav(18)">Tool 3: Safe Sentence</div>
+    <div class="menu-item" data-screen="19" onclick="menuNav(19)">Toolkit Checkpoint</div>
+    <div class="menu-phase-header"><span class="menu-phase-name">Phase 4 · Brave Steps</span><span class="menu-phase-status" id="mps-4">NOT STARTED</span></div>
+    <div class="menu-item" data-screen="20" onclick="menuNav(20)">What Is a Brave Step?</div>
+    <div class="menu-item" data-screen="21" onclick="menuNav(21)">Scenario: Raising Your Hand</div>
+    <div class="menu-item" data-screen="22" onclick="menuNav(22)">Scenario: Meeting Someone New</div>
+    <div class="menu-item" data-screen="23" onclick="menuNav(23)">Scenario: Feeling Left Out</div>
+    <div class="menu-item" data-screen="24" onclick="menuNav(24)">Scenario: Making a Mistake</div>
+    <div class="menu-item" data-screen="25" onclick="menuNav(25)">Build Your Brave Ladder</div>
+    <div class="menu-item" data-screen="26" onclick="menuNav(26)">Your First Brave Step</div>
+    <div class="menu-phase-header"><span class="menu-phase-name">Phase 5 · Relationships</span><span class="menu-phase-status" id="mps-5">NOT STARTED</span></div>
+    <div class="menu-item" data-screen="27" onclick="menuNav(27)">The Friendship Truth</div>
+    <div class="menu-item" data-screen="28" onclick="menuNav(28)">Conversation Starters</div>
+    <div class="menu-item" data-screen="29" onclick="menuNav(29)">When to Ask for Help</div>
+    <div class="menu-item" data-screen="30" onclick="menuNav(30)">A Note to Yourself</div>
+    <div class="menu-phase-header"><span class="menu-phase-name">Phase 6 · Completion</span><span class="menu-phase-status" id="mps-6">NOT STARTED</span></div>
+    <div class="menu-item" data-screen="31" onclick="menuNav(31)">Your Brave Check-In</div>
+    <div class="menu-item" data-screen="32" onclick="menuNav(32)">What You've Learned</div>
+    <div class="menu-item" data-screen="33" onclick="menuNav(33)">Journey Complete</div>
+    <div class="menu-item" data-screen="34" onclick="menuNav(34)">Your Certificate</div>
+  </div>
+  <div id="menu-actions">
+    <button class="menu-action-btn" onclick="restartSession();closeMenu()">Restart Program</button>
+    <button class="menu-action-btn menu-action-logoff" onclick="closeMenu()">Log Off</button>
+    <button class="menu-action-btn menu-action-exit" onclick="restartSession();closeMenu()">Exit &amp; Reset Progress</button>
+  </div>
+</div>
+
+
+<!-- RESUME BANNER -->
+<div id="resume-banner" style="display:none">
+  <div id="resume-card">
+    <h2>Welcome Back! 👋</h2>
+    <p id="resume-msg">You were making progress. Pick up where you left off?</p>
+    <div class="resume-btns">
+      <button class="btn-resume" onclick="resumeSession()">Continue Where I Left Off</button>
+      <button class="btn-restart" onclick="restartSession()">Start Over</button>
+    </div>
+  </div>
+</div>
+
+<!-- APP -->
+<div id="app">
+<div id="screen-wrap">
+
+<!-- ==================== S1 WELCOME ==================== -->
+<div class="screen" id="s1">
+  <div class="welcome-hero">
+    <div class="welcome-badge">Brave Feelings Lab</div>
+    <div class="welcome-benne"><img src="assets/benne-hart-avatar.png" alt="Benne Hart"></div>
+    <div class="mentor-tag">
+      <div class="mentor-tag-name">Benne Hart</div>
+      <div class="mentor-tag-title">Mentor at Brave Feelings Lab</div>
+    </div>
+    <h1 class="welcome-title">Social<br><span class="highlight">Anxiety</span><br>Lab</h1>
+    <p class="welcome-sub">A brave kid's guide to feeling okay around people — even when it's hard.</p>
+    <div class="welcome-stats">
+      <div class="stat-chip"><div class="stat-num">34</div><div class="stat-lbl">Screens</div></div>
+      <div class="stat-chip"><div class="stat-num">6</div><div class="stat-lbl">Phases</div></div>
+      <div class="stat-chip"><div class="stat-num">∞</div><div class="stat-lbl">Courage</div></div>
+    </div>
+  </div>
+  <div class="benne-box">
+    <div class="benne-avatar"><img src="assets/benne-hart-avatar.png" alt="Benne"></div>
+    <div>
+      <div class="benne-name">Benne Hart</div>
+      <div class="benne-title">Mentor · Brave Feelings Lab</div>
+      <div class="benne-speech">Hi! I'm Benne. Feeling nervous around people is something many kids experience — and there are real tools that actually help. I'll guide you through every step. Ready?</div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== S2 NAME ==================== -->
+<div class="screen" id="s2">
+  <div class="section-tag">Phase 0 · Getting Started</div>
+  <h1 class="page-title">What's Your <span class="highlight">Name?</span></h1>
+  <p class="page-subtitle">This program is personal. Let's start with you.</p>
+  <input class="name-input" type="text" id="name-input" placeholder="Type your name here..." maxlength="30" oninput="updateGreeting()">
+  <div class="name-greeting" id="name-greeting"></div>
+  <div class="benne-box">
+    <div class="benne-avatar"><img src="assets/benne-encourage.png" alt="Benne"></div>
+    <div><div class="benne-name">Benne Hart</div><div class="benne-speech">I'll use your name throughout — it helps to know I'm talking to you, not just anyone.</div></div>
+  </div>
+</div>
+
+<!-- ==================== S3 PROMISE ==================== -->
+<div class="screen" id="s3">
+  <div class="section-tag">Phase 0 · The Brave Promise</div>
+  <h1 class="page-title">Make the <span class="highlight">Brave Promise</span></h1>
+  <p class="page-subtitle">Before we begin, let's set the tone. Tap the seal when you're ready to commit to yourself.</p>
+  <div class="promise-seal-wrap">
+    <div class="promise-seal" id="promise-seal" onclick="sealPromise()">
+      <img src="assets/brave-promise-seal.png" alt="Promise Seal">
+    </div>
+    <div class="seal-instruction" id="seal-instruction">👆 Tap the seal to make your promise</div>
+  </div>
+  <div class="promise-lines">
+    <div class="promise-line">I will try, even when it feels hard.</div>
+    <div class="promise-line">I will be honest about how I feel.</div>
+    <div class="promise-line">I will be kind to myself along the way.</div>
+  </div>
+</div>
+
+<!-- ==================== S4 WHAT IS SA ==================== -->
+<div class="screen" id="s4">
+  <div class="section-tag">Phase 1 · Understanding</div>
+  <h1 class="page-title">What Is <span class="highlight">Social Anxiety?</span></h1>
+  <div class="dark-card">
+    <div class="dark-card-icon">🧠</div>
+    <div class="dark-card-title">Your Brain's Alarm System</div>
+    <div class="dark-card-text">Social anxiety happens when your brain's threat-detection system fires in social situations — even safe ones. It's your brain trying to protect you from embarrassment or rejection. It's not a character flaw. It's a pattern that can be changed.</div>
+  </div>
+  <div class="card">
+    <div class="key-row">
+      <div class="key-icon" style="background:var(--teal-pale)">📊</div>
+      <div class="key-text"><strong>Very common.</strong> Many young people experience anxiety in social situations, making it one of the most frequent concerns children bring to counselors.</div>
+    </div>
+    <div class="key-row">
+      <div class="key-icon" style="background:var(--yellow-pale)">🔧</div>
+      <div class="key-text"><strong>Learnable.</strong> CBT-based approaches — which this program is built on — have strong evidence for helping children manage social anxiety.</div>
+    </div>
+    <div class="key-row">
+      <div class="key-icon" style="background:var(--coral-pale)">💪</div>
+      <div class="key-text"><strong>Changeable.</strong> Every brave step you take gives your brain new evidence that social situations are safer than it thought.</div>
+    </div>
+  </div>
+  <div class="benne-box">
+    <div class="benne-avatar"><img src="assets/benne-explain.png" alt="Benne"></div>
+    <div><div class="benne-name">Benne Hart</div><div class="benne-speech">Social anxiety isn't something wrong with you. It's something happening in your brain — and brains can learn new patterns.</div></div>
+  </div>
+</div>
+
+<!-- ==================== S5 NOT ALONE ==================== -->
+<div class="screen" id="s5">
+  <div class="section-tag">Phase 1 · Understanding</div>
+  <h1 class="page-title">You Are <span class="highlight">Not Alone</span></h1>
+  <p class="page-subtitle">Tap each card to discover the truth about social anxiety.</p>
+  <div class="scene-img"><img src="assets/youre-not-alone-scene.png" alt="You're not alone"></div>
+  <div class="stat-grid">
+    <div class="stat-card" onclick="revealStat(this)">
+      <div class="stat-front">🤔</div>
+      <div class="stat-back"><div class="stat-big">Very common</div><div class="stat-desc">Social anxiety is one of the most frequently reported concerns in childhood</div></div>
+    </div>
+    <div class="stat-card" onclick="revealStat(this)">
+      <div class="stat-front">💭</div>
+      <div class="stat-back"><div class="stat-big">Most people</div><div class="stat-desc">feel nervous in some social situations — it's part of being human</div></div>
+    </div>
+    <div class="stat-card" onclick="revealStat(this)">
+      <div class="stat-front">🌟</div>
+      <div class="stat-back"><div class="stat-big">It improves</div><div class="stat-desc">with the right tools and practice — this is well-supported by research</div></div>
+    </div>
+    <div class="stat-card" onclick="revealStat(this)">
+      <div class="stat-front">🧩</div>
+      <div class="stat-back"><div class="stat-big">You started</div><div class="stat-desc">in exactly the right place — awareness is the first step</div></div>
+    </div>
+  </div>
+  <div class="tap-hint">Tap each card to reveal ↑</div>
+</div>
+
+<!-- ==================== S6 WORRY BRAIN ==================== -->
+<div class="screen" id="s6">
+  <div class="section-tag">Phase 1 · Understanding</div>
+  <h1 class="page-title">Two Voices <span class="highlight">Inside You</span></h1>
+  <p class="page-subtitle">You have two ways of thinking about any social situation. Understanding both is key.</p>
+  <img class="img-full" src="assets/diagram-worry-brain.png" alt="Worry Brain vs Wise Brain">
+  <div class="card">
+    <div class="key-row">
+      <div class="key-icon" style="background:var(--coral-pale)">🔴</div>
+      <div class="key-text"><strong>Worry Brain</strong> is loud, fast, and dramatic. It focuses on worst-case outcomes and sends the alarm signal. It's trying to protect you — just too aggressively.</div>
+    </div>
+    <div class="key-row">
+      <div class="key-icon" style="background:var(--teal-pale)">🟢</div>
+      <div class="key-text"><strong>Wise Brain</strong> is calm, slower, and more accurate. It asks "what is actually likely here?" and helps you evaluate situations realistically.</div>
+    </div>
+  </div>
+  <div class="benne-box">
+    <div class="benne-avatar"><img src="assets/benne-think.png" alt="Benne"></div>
+    <div><div class="benne-name">Benne Hart</div><div class="benne-speech">The goal isn't to silence Worry Brain — it just wants to keep you safe. The goal is to help Wise Brain speak up more clearly.</div></div>
+  </div>
+</div>
+
+<!-- ==================== S7 BODY MAP ==================== -->
+<div class="screen" id="s7">
+  <div class="section-tag">Phase 1 · Understanding</div>
+  <h1 class="page-title">Where Do You <span class="highlight">Feel It?</span></h1>
+  <p class="page-subtitle">Anxiety always shows up somewhere in the body. Tap where you notice it most. (Select at least one.)</p>
+  <div class="body-map-wrap">
+    <div class="body-map-fig">
+      <img src="assets/body-map-silhouette.png" alt="Body Map">
+      <div class="hotspot" data-part="Head"    style="left:50%;top:9%"  onclick="toggleHotspot(this,'Head','Racing thoughts, feeling dizzy, hard to concentrate')"></div>
+      <div class="hotspot" data-part="Throat"  style="left:50%;top:22%" onclick="toggleHotspot(this,'Throat','Tight feeling, hard to speak, voice feels shaky')"></div>
+      <div class="hotspot" data-part="Chest"   style="left:50%;top:34%" onclick="toggleHotspot(this,'Chest','Heart beating fast, tight chest, hard to breathe')"></div>
+      <div class="hotspot" data-part="Stomach" style="left:50%;top:47%" onclick="toggleHotspot(this,'Stomach','Butterflies, nausea, stomach feels knotted')"></div>
+      <div class="hotspot" data-part="Hands"   style="left:20%;top:42%" onclick="toggleHotspot(this,'Hands','Sweaty, shaky, fidgety')"></div>
+      <div class="hotspot" data-part="Hands"   style="left:80%;top:42%" onclick="toggleHotspot(this,'Hands','Sweaty, shaky, fidgety')"></div>
+      <div class="hotspot" data-part="Legs"    style="left:50%;top:68%" onclick="toggleHotspot(this,'Legs','Shaky, frozen, urge to run away')"></div>
+    </div>
+    <div class="body-map-info">
+      <div class="body-selected">
+        <div class="body-selected-title">Areas selected</div>
+        <ul class="body-selected-list" id="body-list">
+          <li style="color:var(--text-light);font-style:italic">Tap the body to begin...</li>
+        </ul>
+      </div>
+      <div class="body-count" id="body-count"></div>
+      <div class="benne-box" style="margin:10px 0 0;">
+        <div class="benne-avatar" style="width:48px;height:48px"><img src="assets/benne-listen.png" alt="Benne"></div>
+        <div><div class="benne-name" style="font-size:9px">Benne Hart</div><div class="benne-speech" style="font-size:12px">These sensations are your body's way of signaling. Knowing them helps you recognize anxiety early.</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== S8 FINGERPRINT ==================== -->
+<div class="screen" id="s8">
+  <div class="section-tag">Phase 1 · Understanding</div>
+  <h1 class="page-title">Your Anxiety <span class="highlight">Fingerprint</span></h1>
+  <p class="page-subtitle">No two people experience anxiety exactly the same way. Here's what yours looks like.</p>
+  <div class="fingerprint-card">
+    <div class="fingerprint-title" id="fp-name">Your Personal Pattern</div>
+    <p style="font-size:13px;font-weight:600;opacity:.8;margin-bottom:14px;line-height:1.6">Based on what you shared, your anxiety tends to show up in these ways:</p>
+    <div class="fingerprint-zones" id="fp-zones">
+      <div class="fzone active">Body signals</div>
+      <div class="fzone active">Nervous energy</div>
+      <div class="fzone">Racing thoughts</div>
+      <div class="fzone">Social worry</div>
+    </div>
+  </div>
+  <div class="card card-teal">
+    <div class="benne-name" style="color:var(--teal)">Why your pattern matters</div>
+    <div style="font-size:14px;font-weight:600;color:var(--text-dark);line-height:1.65;margin-top:6px">Recognizing your own pattern means you can spot anxiety <em>before</em> it takes over — and reach for the right tool sooner.</div>
+  </div>
+</div>
+
+<!-- ==================== S9 TRIGGERS ==================== -->
+<div class="screen" id="s9">
+  <div class="section-tag">Phase 1 · Understanding</div>
+  <h1 class="page-title">What Triggers <span class="highlight">Your Worry?</span></h1>
+  <p class="page-subtitle">Tap every situation that makes you feel nervous. Select at least one — this shapes your program.</p>
+  <div class="trigger-grid" id="trigger-grid">
+    <div class="trigger-card" onclick="toggleTrigger(this,'raising-hand')" data-trigger="raising-hand">
+      <img class="trigger-img" src="assets/icon-raised-hand.png" alt="">
+      <div class="trigger-label">Raising my hand in class</div>
+    </div>
+    <div class="trigger-card" onclick="toggleTrigger(this,'meeting-someone')" data-trigger="meeting-someone">
+      <img class="trigger-img" src="assets/icon-meeting-someone.png" alt="">
+      <div class="trigger-label">Meeting new people</div>
+    </div>
+    <div class="trigger-card" onclick="toggleTrigger(this,'being-called-on')" data-trigger="being-called-on">
+      <img class="trigger-img" src="assets/icon-called-on.png" alt="">
+      <div class="trigger-label">Being called on</div>
+    </div>
+    <div class="trigger-card" onclick="toggleTrigger(this,'eating-around-others')" data-trigger="eating-around-others">
+      <img class="trigger-img" src="assets/icon-group-lunch_.png" alt="">
+      <div class="trigger-label">Eating around others</div>
+    </div>
+    <div class="trigger-card" onclick="toggleTrigger(this,'performing')" data-trigger="performing">
+      <img class="trigger-img" src="assets/icon-performing_.png" alt="">
+      <div class="trigger-label">Performing or presenting</div>
+    </div>
+    <div class="trigger-card" onclick="toggleTrigger(this,'phone-calls')" data-trigger="phone-calls">
+      <img class="trigger-img" src="assets/icon-phone-call.png" alt="">
+      <div class="trigger-label">Making phone calls</div>
+    </div>
+    <div class="trigger-card" onclick="toggleTrigger(this,'left-out')" data-trigger="left-out">
+      <img class="trigger-img" src="assets/icon-being-left-out_png_.png" alt="">
+      <div class="trigger-label">Feeling left out</div>
+    </div>
+    <div class="trigger-card" onclick="toggleTrigger(this,'answering-door')" data-trigger="answering-door">
+      <img class="trigger-img" src="assets/icon-answering-door.png" alt="">
+      <div class="trigger-label">Answering the door</div>
+    </div>
+    <div class="trigger-card" onclick="toggleTrigger(this,'making-mistakes')" data-trigger="making-mistakes">
+      <img class="trigger-img" src="assets/icon-making-mistake.png" alt="">
+      <div class="trigger-label">Making mistakes publicly</div>
+    </div>
+  </div>
+  <div class="trigger-count-label" id="trigger-count">0 selected</div>
+</div>
+
+<!-- ==================== S10 WORRY LOOP ==================== -->
+<div class="screen" id="s10">
+  <div class="section-tag">Phase 2 · Thought Traps</div>
+  <h1 class="page-title">Meet the <span class="highlight">Worry Loop</span></h1>
+  <p class="page-subtitle">This is the cycle that keeps anxiety going. Seeing it clearly is the first step to breaking it.</p>
+  <img class="img-full" src="assets/diagram-worry-loop.png" alt="The Worry Loop">
+  <div class="card card-coral">
+    <div class="benne-name" style="color:var(--coral)">How the loop works</div>
+    <div style="font-size:14px;font-weight:600;color:var(--text-dark);line-height:1.65;margin-top:6px">A trigger fires the alarm. Your brain imagines worst-case outcomes. Your body reacts. You avoid the situation to find relief. The relief is real — but it teaches your brain that the situation was genuinely dangerous. Next time the alarm fires louder. That's the trap.</div>
+  </div>
+  <div class="benne-box">
+    <div class="benne-avatar"><img src="assets/benne-explain.png" alt="Benne"></div>
+    <div><div class="benne-name">Benne Hart</div><div class="benne-speech">Avoidance feels safe in the moment. But each time we avoid, the fear grows a little bigger. The exit from this loop is facing it — one small step at a time.</div></div>
+  </div>
+</div>
+
+<!-- ==================== S11 THOUGHT DETECTIVE ==================== -->
+<div class="screen" id="s11">
+  <div class="section-tag">Phase 2 · Thought Traps</div>
+  <h1 class="page-title">Become a <span class="highlight">Thought Detective</span></h1>
+  <p class="page-subtitle">When anxiety sends a scary thought, a good detective doesn't just accept it — they investigate.</p>
+  <div class="benne-box">
+    <div class="benne-avatar"><img src="assets/benne-detective.png" alt="Benne"></div>
+    <div><div class="benne-name">Benne Hart</div><div class="benne-speech">Detectives don't accept the first story they hear. They ask questions. Let's do exactly that with anxious thoughts.</div></div>
+  </div>
+  <div class="detective-q">
+    <div class="detective-num">1</div>
+    <div class="detective-text"><strong>Is this thought definitely true?</strong> Or does it just feel true right now? Feelings are real — but feelings are not the same as facts.</div>
+  </div>
+  <div class="detective-q">
+    <div class="detective-num">2</div>
+    <div class="detective-text"><strong>What's the absolute worst that could actually happen?</strong> When we say it out loud, the worst case is usually far more survivable than it felt inside our head.</div>
+  </div>
+  <div class="detective-q">
+    <div class="detective-num">3</div>
+    <div class="detective-text"><strong>What is the most likely thing that will actually happen?</strong> Not the worst case — the realistic case. This is usually very ordinary, and very manageable.</div>
+  </div>
+</div>
+
+<!-- ==================== S12 CATASTROPHE SORT ==================== -->
+<div class="screen" id="s12">
+  <div class="section-tag">Phase 2 · Thought Traps</div>
+  <h1 class="page-title">Catastrophe or <span class="highlight">Concern?</span></h1>
+  <p class="page-subtitle">Sort each worry. Is it a true catastrophe — or just a real concern that's been exaggerated?</p>
+  <img class="img-full" src="assets/catastrophe-bins.png" alt="Sorting bins">
+  <div id="sort-scenarios">
+    <div class="sort-item" id="sort-1">
+      <div class="sort-item-text">"If I answer wrong, everyone will laugh at me forever."</div>
+      <div class="sort-btns">
+        <button class="sort-btn sort-btn-cat" onclick="sortItem('sort-1','cat')">😱 Catastrophe</button>
+        <button class="sort-btn sort-btn-con" onclick="sortItem('sort-1','con')">😐 Real Concern</button>
+      </div>
+      <div class="sort-result" id="sort-1-result"></div>
+    </div>
+    <div class="sort-item" id="sort-2">
+      <div class="sort-item-text">"I feel nervous about speaking in front of people."</div>
+      <div class="sort-btns">
+        <button class="sort-btn sort-btn-cat" onclick="sortItem('sort-2','cat')">😱 Catastrophe</button>
+        <button class="sort-btn sort-btn-con" onclick="sortItem('sort-2','con')">😐 Real Concern</button>
+      </div>
+      <div class="sort-result" id="sort-2-result"></div>
+    </div>
+    <div class="sort-item" id="sort-3">
+      <div class="sort-item-text">"Nobody will ever want to be my friend."</div>
+      <div class="sort-btns">
+        <button class="sort-btn sort-btn-cat" onclick="sortItem('sort-3','cat')">😱 Catastrophe</button>
+        <button class="sort-btn sort-btn-con" onclick="sortItem('sort-3','con')">😐 Real Concern</button>
+      </div>
+      <div class="sort-result" id="sort-3-result"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== S13 SPOTLIGHT ==================== -->
+<div class="screen" id="s13">
+  <div class="section-tag">Phase 2 · Thought Traps</div>
+  <h1 class="page-title">The <span class="highlight">Spotlight Illusion</span></h1>
+  <p class="page-subtitle">Your brain believes everyone is watching and judging you. Here is what is actually happening.</p>
+  <img class="img-full" src="assets/diagram-spotlight.png" alt="The Spotlight Illusion">
+  <div class="card card-navy">
+    <div style="font-family:'Fredoka One',cursive;font-size:18px;color:var(--teal-light);margin-bottom:8px">The Truth About Attention</div>
+    <div style="font-size:14px;font-weight:600;line-height:1.65;opacity:.9">Research on the "spotlight effect" consistently shows people overestimate how much others notice and remember their actions. Everyone is the star of their own mental movie — focused on their own worries, not yours.</div>
+  </div>
+  <div class="benne-box">
+    <div class="benne-avatar"><img src="assets/benne-think.png" alt="Benne"></div>
+    <div><div class="benne-name">Benne Hart</div><div class="benne-speech">The spotlight in your head exists only in your head. This is one of the most freeing things you can come to understand about social situations.</div></div>
+  </div>
+</div>
+
+<!-- ==================== S14 REWRITE ==================== -->
+<div class="screen" id="s14">
+  <div class="section-tag">Phase 2 · Thought Traps</div>
+  <h1 class="page-title">Rewrite the <span class="highlight">Thought</span></h1>
+  <p class="page-subtitle">Take one of your anxious thoughts and rewrite it the way your Wise Brain would.</p>
+  <div class="thought-original">
+    <div class="thought-original-label">One of your anxious thoughts</div>
+    <div class="thought-original-text" id="anxious-thought">"Everyone will notice if I say something wrong."</div>
+  </div>
+  <div class="thought-new">
+    <div class="thought-new-label">Wise Brain rewrite — what's actually more likely?</div>
+    <textarea class="thought-textarea" id="thought-rewrite-input" placeholder="Most people are focused on themselves. Even if something feels awkward to me, they'll probably move on quickly..." oninput="captureThoughtRewrite()"></textarea>
+  </div>
+  <div class="benne-box">
+    <div class="benne-avatar"><img src="assets/benne-detective.png" alt="Benne"></div>
+    <div><div class="benne-name">Benne Hart</div><div class="benne-speech">You don't have to fully believe the rewrite yet. Just practice thinking like your Wise Brain. It gets more natural with time.</div></div>
+  </div>
+</div>
+
+<!-- ==================== S15 CALM FIRST ==================== -->
+<div class="screen" id="s15">
+  <div class="section-tag">Phase 3 · Calm Toolkit</div>
+  <h1 class="page-title">Why <span class="highlight">Calm Comes First</span></h1>
+  <p class="page-subtitle">Before your thinking brain can help you, the alarm has to quiet down.</p>
+  <img class="img-full" src="assets/diagram-alarm-system.png" alt="The Alarm System">
+  <div class="card card-teal">
+    <div class="benne-name" style="color:var(--teal)">The Brain Science</div>
+    <div style="font-size:14px;font-weight:600;color:var(--text-dark);line-height:1.65;margin-top:6px">When your threat-detection system fires, it can interfere with your brain's reasoning centers. This is why you can't simply "think your way out" of anxiety in the middle of a spike. The sequence matters: first calm the body, then use thinking tools. Not the other way around.</div>
+  </div>
+  <div class="benne-box">
+    <div class="benne-avatar"><img src="assets/benne-explain.png" alt="Benne"></div>
+    <div><div class="benne-name">Benne Hart</div><div class="benne-speech">We have three calm-down tools ahead. None of them require anything except your breath and your attention. Let's learn them.</div></div>
+  </div>
+</div>
+
+<!-- ==================== S16 BOX BREATHING ==================== -->
+<div class="screen" id="s16">
+  <div class="section-tag">Phase 3 · Calm Toolkit</div>
+  <h1 class="page-title">Tool 1: <span class="highlight">Box Breathing</span></h1>
+  <p class="page-subtitle">Slow, controlled breathing activates your body's calm response. Complete all 3 rounds to continue.</p>
+  <div class="breathing-container">
+    <div class="breath-circle" id="breath-circle">
+      <div class="breath-count" id="breath-count">4</div>
+      <div class="breath-phase" id="breath-phase">Ready</div>
+    </div>
+    <div class="breath-rounds">Round <span id="round-num">0</span> of 3</div>
+    <button class="breath-start" id="breath-btn" onclick="startBreathing()">Start Breathing</button>
+  </div>
+  <div class="benne-box">
+    <div class="benne-avatar"><img src="assets/benne-calm.png" alt="Benne"></div>
+    <div><div class="benne-name">Benne Hart</div><div class="benne-speech">Breathe in for 4 counts, hold for 4, out for 4, hold for 4. That's one round. Three rounds and you'll feel a real difference.</div></div>
+  </div>
+</div>
+
+<!-- ==================== S17 GROUNDING ==================== -->
+<div class="screen" id="s17">
+  <div class="section-tag">Phase 3 · Calm Toolkit</div>
+  <h1 class="page-title">Tool 2: <span class="highlight">5-4-3-2-1 Ground</span></h1>
+  <p class="page-subtitle">This pulls your mind out of the worry spiral and back into the present moment. Look around you now and fill this in.</p>
+  <img class="img-full" src="assets/grounding-scene.png" alt="Grounding Scene">
+  <ul class="grounding-steps">
+    <li class="grounding-step"><div class="grounding-num">5</div><div style="flex:1"><div class="grounding-sense">Things you can <strong>SEE</strong></div><input class="grounding-input" placeholder="e.g. my desk, a window, my hands..."></div></li>
+    <li class="grounding-step"><div class="grounding-num">4</div><div style="flex:1"><div class="grounding-sense">Things you can <strong>TOUCH</strong></div><input class="grounding-input" placeholder="e.g. my shirt, the floor, a book..."></div></li>
+    <li class="grounding-step"><div class="grounding-num">3</div><div style="flex:1"><div class="grounding-sense">Things you can <strong>HEAR</strong></div><input class="grounding-input" placeholder="e.g. birds, voices, music..."></div></li>
+    <li class="grounding-step"><div class="grounding-num">2</div><div style="flex:1"><div class="grounding-sense">Things you can <strong>SMELL</strong></div><input class="grounding-input" placeholder="e.g. lunch, outside air..."></div></li>
+    <li class="grounding-step"><div class="grounding-num">1</div><div style="flex:1"><div class="grounding-sense">Thing you can <strong>TASTE</strong></div><input class="grounding-input" placeholder="e.g. a snack, toothpaste..."></div></li>
+  </ul>
+</div>
+
+<!-- ==================== S18 SAFE SENTENCE ==================== -->
+<div class="screen" id="s18">
+  <div class="section-tag">Phase 3 · Calm Toolkit</div>
+  <h1 class="page-title">Tool 3: <span class="highlight">Your Safe Sentence</span></h1>
+  <p class="page-subtitle">A personal anchor phrase you say to yourself when anxiety spikes. Choose one or write your own. (Required to continue.)</p>
+  <img class="safe-card-img" src="assets/safe-sentence-card.png" alt="Safe Sentence Card">
+  <div class="safe-option" data-sentence="I have gotten through hard things before." onclick="selectSafe(this,'I have gotten through hard things before.')">I have gotten through hard things before.</div>
+  <div class="safe-option" data-sentence="This feeling will pass. I am okay." onclick="selectSafe(this,'This feeling will pass. I am okay.')">This feeling will pass. I am okay.</div>
+  <div class="safe-option" data-sentence="I am brave even when I am scared." onclick="selectSafe(this,'I am brave even when I am scared.')">I am brave even when I am scared.</div>
+  <div class="safe-option" data-sentence="One step at a time. I can handle this." onclick="selectSafe(this,'One step at a time. I can handle this.')">One step at a time. I can handle this.</div>
+  <div style="margin:10px 0;font-size:12px;font-weight:700;color:var(--text-light);text-align:center">— or write your own —</div>
+  <input class="safe-custom" id="safe-custom" type="text" placeholder="Write your own safe sentence..." oninput="customSafe(this)">
+</div>
+
+<!-- ==================== S19 QUIZ ==================== -->
+<div class="screen" id="s19">
+  <div class="section-tag">Phase 3 · Calm Toolkit</div>
+  <h1 class="page-title">Toolkit <span class="highlight">Checkpoint</span></h1>
+  <p class="page-subtitle">Let's lock in your three tools. Tap the best answer for each.</p>
+  <div class="quiz-q" id="qq1">
+    <div class="quiz-question">Box Breathing uses a count of…</div>
+    <div class="quiz-options">
+      <button class="quiz-opt" onclick="answerQuiz('qq1',this,'wrong')">2-2-2-2</button>
+      <button class="quiz-opt" onclick="answerQuiz('qq1',this,'correct')">4-4-4-4</button>
+      <button class="quiz-opt" onclick="answerQuiz('qq1',this,'wrong')">8-8-8-8</button>
+    </div>
+    <div class="quiz-feedback">✓ Breathe in 4, hold 4, out 4, hold 4. That's one complete round.</div>
+  </div>
+  <div class="quiz-q" id="qq2">
+    <div class="quiz-question">The 5-4-3-2-1 technique works by using your…</div>
+    <div class="quiz-options">
+      <button class="quiz-opt" onclick="answerQuiz('qq2',this,'wrong')">Imagination</button>
+      <button class="quiz-opt" onclick="answerQuiz('qq2',this,'correct')">Five senses</button>
+      <button class="quiz-opt" onclick="answerQuiz('qq2',this,'wrong')">Memory</button>
+    </div>
+    <div class="quiz-feedback">✓ Your senses anchor you in the present moment — pulling attention away from the worry loop.</div>
+  </div>
+  <div class="quiz-q" id="qq3">
+    <div class="quiz-question">A Safe Sentence is…</div>
+    <div class="quiz-options">
+      <button class="quiz-opt" onclick="answerQuiz('qq3',this,'wrong')">A magic phrase that erases anxiety</button>
+      <button class="quiz-opt" onclick="answerQuiz('qq3',this,'correct')">A personal anchor phrase you say to yourself</button>
+      <button class="quiz-opt" onclick="answerQuiz('qq3',this,'wrong')">Something a doctor gives you</button>
+    </div>
+    <div class="quiz-feedback">✓ It's personal, it's yours, and it works because you chose it yourself.</div>
+  </div>
+  <div class="benne-box">
+    <div class="benne-avatar"><img src="assets/benne-encourage.png" alt="Benne"></div>
+    <div><div class="benne-name">Benne Hart</div><div class="benne-speech">Three tools. All yours. Next — we practice using them in real situations.</div></div>
+  </div>
+</div>
+
+<!-- ==================== S20 BRAVE STEPS ==================== -->
+<div class="screen" id="s20">
+  <div class="section-tag">Phase 4 · Brave Steps</div>
+  <h1 class="page-title">What Is a <span class="highlight">Brave Step?</span></h1>
+  <p class="page-subtitle">Not jumping in the deep end. One toe at a time — always.</p>
+  <img class="img-full" src="assets/diagram-brave-staircase.png" alt="Brave Staircase">
+  <div class="card card-teal">
+    <div class="benne-name" style="color:var(--teal)">The Science Behind It</div>
+    <div style="font-size:14px;font-weight:600;color:var(--text-dark);line-height:1.65;margin-top:6px">Graduated exposure — the approach behind brave steps — is one of the most evidence-supported methods for reducing anxiety in children. Every time you face a fear in a manageable way, your brain updates its threat assessment. Over time it learns: this situation is safer than I thought.</div>
+  </div>
+  <div class="benne-box">
+    <div class="benne-avatar"><img src="assets/benne-explain.png" alt="Benne"></div>
+    <div><div class="benne-name">Benne Hart</div><div class="benne-speech">Bravery isn't the absence of fear. It's taking the step while the fear is still there — because you trust that the step is worth taking.</div></div>
+  </div>
+</div>
+
+<!-- ==================== S21 SCENARIO: RAISING HAND ==================== -->
+<div class="screen" id="s21">
+  <div class="section-tag">Phase 4 · Scenario Lab 1 of 4</div>
+  <h1 class="page-title">Scenario: <span class="highlight">Raising Your Hand</span></h1>
+  <img class="scenario-setup-img" src="assets/scene-raising-hand.png" alt="Raising hand scenario">
+  <div class="scenario-setup-text">The teacher asks a question. You think you know the answer. Your heart starts beating faster. Your hand feels heavy. What do you do?</div>
+  <div class="scenario-choices" id="choices-21">
+    <button class="choice-btn" onclick="chooseScenario(21,'brave',this)">Raise my hand and try to answer</button>
+    <button class="choice-btn" onclick="chooseScenario(21,'small',this)">Write the answer down instead — not out loud yet</button>
+    <button class="choice-btn" onclick="chooseScenario(21,'avoid',this)">Stay quiet and hope she doesn't call on me</button>
+  </div>
+  <div class="scenario-outcome" id="outcome-21">
+    <div class="outcome-badge" id="badge-21"></div>
+    <div class="outcome-text" id="outcome-text-21"></div>
+  </div>
+  <div class="scenario-reflection visible" id="reflect-21" style="display:none">💭 Which choice felt most like what you'd really do? What would you want to try next time?</div>
+  <div class="benne-box" id="benne-21" style="display:none">
+    <div class="benne-avatar"><img src="assets/benne-encourage.png" alt="Benne"></div>
+    <div><div class="benne-name">Benne Hart</div><div class="benne-speech" id="benne-speech-21"></div></div>
+  </div>
+</div>
+
+<!-- ==================== S22 SCENARIO: MEETING SOMEONE ==================== -->
+<div class="screen" id="s22">
+  <div class="section-tag">Phase 4 · Scenario Lab 2 of 4</div>
+  <h1 class="page-title">Scenario: <span class="highlight">Meeting Someone New</span></h1>
+  <img class="scenario-setup-img" src="assets/scene-meeting-someone.png" alt="Meeting someone">
+  <div class="scenario-setup-text">A kid you don't know looks at you and says "Hi." Your brain freezes. What do you do?</div>
+  <div class="scenario-choices" id="choices-22">
+    <button class="choice-btn" onclick="chooseScenario(22,'brave',this)">Say "Hi" back and maybe ask their name</button>
+    <button class="choice-btn" onclick="chooseScenario(22,'small',this)">Give a small smile and a nod — that's a start</button>
+    <button class="choice-btn" onclick="chooseScenario(22,'avoid',this)">Look away and pretend I didn't hear</button>
+  </div>
+  <div class="scenario-outcome" id="outcome-22">
+    <div class="outcome-badge" id="badge-22"></div>
+    <div class="outcome-text" id="outcome-text-22"></div>
+  </div>
+  <div class="scenario-reflection" id="reflect-22" style="display:none">💭 Even a small smile counts as a brave step. What feels most doable for you right now?</div>
+  <div class="benne-box" id="benne-22" style="display:none">
+    <div class="benne-avatar"><img src="assets/benne-encourage.png" alt="Benne"></div>
+    <div><div class="benne-name">Benne Hart</div><div class="benne-speech" id="benne-speech-22"></div></div>
+  </div>
+</div>
+
+<!-- ==================== S23 SCENARIO: LEFT OUT ==================== -->
+<div class="screen" id="s23">
+  <div class="section-tag">Phase 4 · Scenario Lab 3 of 4</div>
+  <h1 class="page-title">Scenario: <span class="highlight">Feeling Left Out</span></h1>
+  <img class="scenario-setup-img" src="assets/scene-left-out.png" alt="Being left out">
+  <div class="scenario-setup-text">It's recess. A group of kids are playing nearby. You want to join — but they didn't invite you. You feel that familiar ache. What do you do?</div>
+  <div class="scenario-choices" id="choices-23">
+    <button class="choice-btn" onclick="chooseScenario(23,'brave',this)">Walk over and ask if I can join</button>
+    <button class="choice-btn" onclick="chooseScenario(23,'small',this)">Find one person separately and start there</button>
+    <button class="choice-btn" onclick="chooseScenario(23,'avoid',this)">Walk away and spend recess alone</button>
+  </div>
+  <div class="scenario-outcome" id="outcome-23">
+    <div class="outcome-badge" id="badge-23"></div>
+    <div class="outcome-text" id="outcome-text-23"></div>
+  </div>
+  <div class="scenario-reflection" id="reflect-23" style="display:none">💭 Feeling left out is one of the hardest feelings. Any step toward connection — even a small one — is genuinely brave.</div>
+  <div class="benne-box" id="benne-23" style="display:none">
+    <div class="benne-avatar"><img src="assets/benne-listen.png" alt="Benne"></div>
+    <div><div class="benne-name">Benne Hart</div><div class="benne-speech" id="benne-speech-23"></div></div>
+  </div>
+</div>
+
+<!-- ==================== S24 SCENARIO: MISTAKE ==================== -->
+<div class="screen" id="s24">
+  <div class="section-tag">Phase 4 · Scenario Lab 4 of 4</div>
+  <h1 class="page-title">Scenario: <span class="highlight">Making a Mistake</span></h1>
+  <img class="scenario-setup-img" src="assets/scene-making-mistake.png" alt="Making a mistake">
+  <div class="scenario-setup-text">You answered a question wrong in class. You can feel your face going red. Everyone heard. What do you do next?</div>
+  <div class="scenario-choices" id="choices-24">
+    <button class="choice-btn" onclick="chooseScenario(24,'brave',this)">Take a breath and keep going — mistakes happen to everyone</button>
+    <button class="choice-btn" onclick="chooseScenario(24,'small',this)">Quietly say "oops" and move on — acknowledge it lightly</button>
+    <button class="choice-btn" onclick="chooseScenario(24,'avoid',this)">Sink into my seat and want to disappear</button>
+  </div>
+  <div class="scenario-outcome" id="outcome-24">
+    <div class="outcome-badge" id="badge-24"></div>
+    <div class="outcome-text" id="outcome-text-24"></div>
+  </div>
+  <div class="scenario-reflection" id="reflect-24" style="display:none">💭 Mistake recovery is one of the most important social skills — and almost nobody teaches it directly.</div>
+  <div class="benne-box" id="benne-24" style="display:none">
+    <div class="benne-avatar"><img src="assets/benne-encourage.png" alt="Benne"></div>
+    <div><div class="benne-name">Benne Hart</div><div class="benne-speech" id="benne-speech-24"></div></div>
+  </div>
+</div>
+
+<!-- ==================== S25 BRAVE LADDER ==================== -->
+<div class="screen" id="s25">
+  <div class="section-tag">Phase 4 · Brave Steps</div>
+  <h1 class="page-title">Build Your <span class="highlight">Brave Ladder</span></h1>
+  <p class="page-subtitle">List 5 social challenges from smallest (Rung 1) to biggest (Rung 5). You must fill in Rung 1 to continue.</p>
+  <img src="assets/brave-ladder-template.png" style="width:170px;display:block;margin:0 auto 14px;filter:drop-shadow(0 6px 20px rgba(30,58,95,.12));" alt="Brave Ladder">
+  <div class="ladder-inputs">
+    <div class="ladder-rung"><div class="rung-num rung-1">1</div><input class="rung-input" id="rung1" placeholder="Smallest challenge — something a little scary..." oninput="onRungInput()"></div>
+    <div class="ladder-rung"><div class="rung-num rung-2">2</div><input class="rung-input" id="rung2" placeholder="A bit bigger..." oninput="onRungInput()"></div>
+    <div class="ladder-rung"><div class="rung-num rung-3">3</div><input class="rung-input" id="rung3" placeholder="Medium challenge..." oninput="onRungInput()"></div>
+    <div class="ladder-rung"><div class="rung-num rung-4">4</div><input class="rung-input" id="rung4" placeholder="Pretty scary..." oninput="onRungInput()"></div>
+    <div class="ladder-rung"><div class="rung-num rung-5">5</div><input class="rung-input" id="rung5" placeholder="Your biggest brave goal..." oninput="onRungInput()"></div>
+  </div>
+</div>
+
+<!-- ==================== S26 FIRST STEP ==================== -->
+<div class="screen" id="s26">
+  <div class="section-tag">Phase 4 · Brave Steps</div>
+  <h1 class="page-title">Your <span class="highlight">First Brave Step</span></h1>
+  <p class="page-subtitle">Rung 1 of your ladder is your mission this week. Commit to trying it — not perfecting it.</p>
+  <div class="first-step-card">
+    <h3>Your Brave Step This Week</h3>
+    <p style="font-size:13px;opacity:.8;margin-bottom:8px">From your Brave Ladder, Rung 1:</p>
+    <div class="first-step-display" id="first-step-display">—</div>
+  </div>
+  <div class="commit-check" onclick="toggleCommit()">
+    <div class="commit-checkbox" id="commit-box"></div>
+    <div class="commit-text">Yes — I commit to trying this step this week. I don't need to be perfect. I just need to try.</div>
+  </div>
+  <div class="benne-box">
+    <div class="benne-avatar"><img src="assets/benne-celebrate.png" alt="Benne"></div>
+    <div><div class="benne-name">Benne Hart</div><div class="benne-speech">The decision to try IS the brave step. You've done something important just by writing it down and committing to it.</div></div>
+  </div>
+</div>
+
+<!-- ==================== S27 FRIENDSHIP TRUTH ==================== -->
+<div class="screen" id="s27">
+  <div class="section-tag">Phase 5 · Relationships</div>
+  <h1 class="page-title">The <span class="highlight">Friendship Truth</span></h1>
+  <p class="page-subtitle">Here's what anxiety never tells you about how friendships actually start.</p>
+  <img class="img-full" src="assets/scene-friendship-bench.png" alt="Friendship bench">
+  <div class="card card-navy">
+    <div style="font-family:'Fredoka One',cursive;font-size:18px;color:var(--teal-light);margin-bottom:8px">What Real Friendships Look Like at the Start</div>
+    <div style="font-size:14px;font-weight:600;line-height:1.65;opacity:.9">Most friendships start awkward. That's normal. Nobody walks up to someone and feels instantly comfortable. Real friendship grows slowly — one slightly uncomfortable exchange at a time. Anxiety tells you that smoothness is required. It isn't.</div>
+  </div>
+  <div class="card card-teal">
+    <div class="key-row" style="padding:8px 0;">
+      <div style="font-size:13px;font-weight:700;color:var(--coral)">❌ What anxiety says: "I need to be perfectly interesting and funny."</div>
+    </div>
+    <div class="key-row" style="padding:8px 0;border-bottom:none;">
+      <div style="font-size:13px;font-weight:700;color:var(--teal)">✓ What's actually true: "I just need to show up and be curious about the other person."</div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== S28 CONVERSATION CARDS ==================== -->
+<div class="screen" id="s28">
+  <div class="section-tag">Phase 5 · Relationships</div>
+  <h1 class="page-title">Conversation <span class="highlight">Starters That Work</span></h1>
+  <p class="page-subtitle">Tap any card to star your favorites. These are real openers that don't require you to be clever or funny.</p>
+  <img class="img-full" src="assets/conversation-cards.png" alt="Conversation Cards">
+  <div class="convo-deck">
+    <div class="convo-card" style="background:var(--teal-pale);border:2px solid var(--teal);"     onclick="toggleFav(this,0)"><div class="convo-starter">"What's your favorite thing to do after school?"</div></div>
+    <div class="convo-card" style="background:var(--coral-pale);border:2px solid var(--coral);"   onclick="toggleFav(this,1)"><div class="convo-starter">"Have you seen any good movies lately?"</div></div>
+    <div class="convo-card" style="background:var(--yellow-pale);border:2px solid var(--yellow);" onclick="toggleFav(this,2)"><div class="convo-starter">"What's the hardest class for you this year?"</div></div>
+    <div class="convo-card" style="background:var(--sky-pale);border:2px solid var(--sky);"       onclick="toggleFav(this,3)"><div class="convo-starter">"Do you have any pets?"</div></div>
+    <div class="convo-card" style="background:var(--teal-pale);border:2px solid var(--teal);"     onclick="toggleFav(this,4)"><div class="convo-starter">"What are you really good at?"</div></div>
+    <div class="convo-card" style="background:var(--yellow-pale);border:2px solid var(--yellow);" onclick="toggleFav(this,5)"><div class="convo-starter">"If you could go anywhere, where would you go?"</div></div>
+  </div>
+  <div style="text-align:center;font-size:12px;font-weight:700;color:var(--text-light);margin-top:4px">Tap a card to star it ★</div>
+</div>
+
+<!-- ==================== S29 ASK FOR HELP ==================== -->
+<div class="screen" id="s29">
+  <div class="section-tag">Phase 5 · Relationships</div>
+  <h1 class="page-title">When to <span class="highlight">Ask for Help</span></h1>
+  <p class="page-subtitle">Normal nervousness fades on its own. Anxiety that stays and grows needs more support — and that's okay.</p>
+  <img class="img-full" src="assets/scene-ask-for-help.png" alt="Asking for help">
+  <div class="help-scale">
+    <div class="help-level"><div class="help-dot" style="background:var(--teal)"></div><div class="help-text"><strong>Normal nervousness</strong> — comes before something new or unfamiliar, then fades. Your toolkit handles this.</div></div>
+    <div class="help-level"><div class="help-dot" style="background:var(--yellow)"></div><div class="help-text"><strong>Frequent anxiety</strong> — comes up often and takes a while to settle. Use your tools and talk to a trusted adult about what you're noticing.</div></div>
+    <div class="help-level"><div class="help-dot" style="background:var(--coral)"></div><div class="help-text"><strong>Anxiety affecting daily life</strong> — avoiding school, friends, or activities you care about. Please tell a trusted adult as soon as you can.</div></div>
+  </div>
+  <div style="font-size:14px;font-weight:700;color:var(--text-dark);margin:14px 0 8px">Who is one trusted adult in your life? (Required)</div>
+  <input class="trusted-input" id="trusted-adult" type="text" placeholder="Write their name here..." oninput="S.trustedAdult=this.value;updateNextState(29);saveState();">
+  <div class="benne-box">
+    <div class="benne-avatar"><img src="assets/benne-listen.png" alt="Benne"></div>
+    <div><div class="benne-name">Benne Hart</div><div class="benne-speech">Asking for help isn't a sign of weakness. It's a sign of wisdom. Every person who has ever gotten better at managing anxiety did it with support from someone they trusted.</div></div>
+  </div>
+</div>
+
+<!-- ==================== S30 NOTE TO SELF ==================== -->
+<div class="screen" id="s30">
+  <div class="section-tag">Phase 5 · Relationships</div>
+  <h1 class="page-title">A Note to <span class="highlight">Yourself</span></h1>
+  <p class="page-subtitle">Write something honest and kind to the brave kid reading this later. (At least a few words required.)</p>
+  <img class="img-full" src="assets/note-to-yourself-card.png" alt="Journal">
+  <div class="self-note-prompts">
+    <span class="note-prompt" onclick="addPrompt('I am proud of myself for...')">I am proud of myself for...</span>
+    <span class="note-prompt" onclick="addPrompt('Something I want to remember is...')">Something I want to remember...</span>
+    <span class="note-prompt" onclick="addPrompt('I am braver than I think because...')">I am braver than I think...</span>
+    <span class="note-prompt" onclick="addPrompt('One thing I will keep trying is...')">One thing I\'ll keep trying...</span>
+  </div>
+  <textarea class="self-note-area" id="self-note" placeholder="Dear me,&#10;&#10;I just finished Social Anxiety Lab and I want to remember..." oninput="onNoteInput()"></textarea>
+</div>
+
+<!-- ==================== S31 CHECK-IN ==================== -->
+<div class="screen" id="s31">
+  <div class="section-tag">Phase 6 · Completion</div>
+  <h1 class="page-title">Your Brave <span class="highlight">Check-In</span></h1>
+  <p class="page-subtitle">Look at what used to feel impossible — and what you have now.</p>
+  <div class="checkin-hero">
+    <img src="assets/brave-checkin-background.png" alt="">
+    <div class="checkin-hero-text" id="checkin-headline">You've come so far. ✨</div>
+  </div>
+  <div class="trigger-compare">
+    <div class="compare-col">
+      <div class="compare-header compare-before">Before: Your Triggers</div>
+      <div id="before-list"><div class="compare-item" style="color:var(--text-light)">Loading...</div></div>
+    </div>
+    <div class="compare-col">
+      <div class="compare-header compare-after">Now: Your Tools</div>
+      <div class="compare-item" style="color:var(--teal)">✓ Box Breathing</div>
+      <div class="compare-item" style="color:var(--teal)">✓ 5-4-3-2-1 Ground</div>
+      <div class="compare-item" style="color:var(--teal)">✓ Safe Sentence</div>
+      <div class="compare-item" style="color:var(--teal)">✓ Thought Detective</div>
+      <div class="compare-item" style="color:var(--teal)">✓ Brave Ladder</div>
+    </div>
+  </div>
+  <div class="benne-box">
+    <div class="benne-avatar"><img src="assets/benne-celebrate.png" alt="Benne"></div>
+    <div><div class="benne-name">Benne Hart</div><div class="benne-speech">You came in with triggers and no tools. You're leaving with tools for every single one of them. That is not a small thing.</div></div>
+  </div>
+</div>
+
+<!-- ==================== S32 WHAT YOU LEARNED ==================== -->
+<div class="screen" id="s32">
+  <div class="section-tag">Phase 6 · Completion</div>
+  <h1 class="page-title">What You've <span class="highlight">Learned</span></h1>
+  <p class="page-subtitle">Tap each one to reveal — personalized to what you shared.</p>
+  <img class="learned-burst" src="assets/celebration-burst.png" alt="Celebration">
+  <div class="learned-items">
+    <div class="learned-item" onclick="revealLearned(this,0)">
+      <div class="learned-item-header"><div class="learned-num">1</div><div class="learned-title">What social anxiety actually is</div></div>
+      <div class="learned-detail" id="learned-detail-0">It's your brain's alarm system firing around social situations — not a flaw, not permanent, and absolutely manageable. For you, it shows up in specific body areas and situations you identified.</div>
+    </div>
+    <div class="learned-item" onclick="revealLearned(this,1)">
+      <div class="learned-item-header"><div class="learned-num">2</div><div class="learned-title">How to calm your body first</div></div>
+      <div class="learned-detail">Box Breathing and the 5-4-3-2-1 technique both work by turning down the alarm so your thinking brain can come back online. Use them before you try to reason through anything.</div>
+    </div>
+    <div class="learned-item" onclick="revealLearned(this,2)">
+      <div class="learned-item-header"><div class="learned-num">3</div><div class="learned-title">Your personal anchor sentence</div></div>
+      <div class="learned-detail" id="learned-detail-2">Your safe sentence is your third toolkit tool — the one you say to yourself in the moment.</div>
+    </div>
+    <div class="learned-item" onclick="revealLearned(this,3)">
+      <div class="learned-item-header"><div class="learned-num">4</div><div class="learned-title">Your first real brave step</div></div>
+      <div class="learned-detail" id="learned-detail-3">Your Brave Ladder is your roadmap for the coming weeks. Start with Rung 1 — that's the plan.</div>
+    </div>
+    <div class="learned-item" onclick="revealLearned(this,4)">
+      <div class="learned-item-header"><div class="learned-num">5</div><div class="learned-title">When and how to ask for help</div></div>
+      <div class="learned-detail">Using your toolkit is brave. And knowing when you need more support — and having a trusted adult ready — is even braver.</div>
+    </div>
+  </div>
+  <div class="tap-reveal-hint">Tap each one to reveal ↑</div>
+</div>
+
+<!-- ==================== S33 ROADMAP ==================== -->
+<div class="screen" id="s33">
+  <div class="section-tag">Phase 6 · Completion</div>
+  <h1 class="page-title">Your Journey <span class="highlight">Complete</span></h1>
+  <p class="page-subtitle">Every phase. Every screen. All of it.</p>
+  <div class="roadmap-wrap">
+    <img src="assets/roadmap-background.png" alt="Journey Roadmap">
+    <div class="roadmap-phases-overlay">
+      <div class="phase-chips">
+        <div class="phase-chip done">✓ Welcome</div>
+        <div class="phase-chip done">✓ Understanding</div>
+        <div class="phase-chip done">✓ Thought Traps</div>
+        <div class="phase-chip done">✓ Calm Toolkit</div>
+        <div class="phase-chip done">✓ Brave Steps</div>
+        <div class="phase-chip final">★ Complete!</div>
+      </div>
+    </div>
+  </div>
+  <div class="benne-box">
+    <div class="benne-avatar"><img src="assets/benne-celebrate.png" alt="Benne"></div>
+    <div><div class="benne-name">Benne Hart</div><div class="benne-speech" id="roadmap-speech">You completed all 34 screens. That took real commitment. I'm genuinely proud of you.</div></div>
+  </div>
+</div>
+
+<!-- ==================== S34 CERTIFICATE ==================== -->
+<div class="screen" id="s34">
+  <div class="section-tag">Phase 6 · You Made It</div>
+  <h1 class="page-title" style="text-align:center">🎉 Congratulations!</h1>
+  <div class="cert-wrap">
+    <img class="cert-bg" src="assets/certificate-background.png" alt="Certificate">
+    <div class="cert-content">
+      <div class="cert-title">Certificate of Completion</div>
+      <div class="cert-subtitle">Social Anxiety Lab · Brave Feelings Lab</div>
+      <div class="cert-name" id="cert-name">Brave Kid</div>
+      <div class="cert-sentence" id="cert-sentence">"I am brave even when I am scared."</div>
+      <div class="cert-note-text" id="cert-note-text"></div>
+      <div class="cert-date" id="cert-date"></div>
+      <div class="cert-benne"><img src="assets/benne-hart-avatar.png" alt="Benne Hart"></div>
+      <div class="cert-mentor">Benne Hart · Mentor at Brave Feelings Lab</div>
+    </div>
+  </div>
+  <button class="print-btn" onclick="window.print()">🖨️ Print My Certificate</button>
+  <div class="benne-box" style="margin-top:14px;">
+    <div class="benne-avatar"><img src="assets/benne-hart-avatar.png" alt="Benne Hart"></div>
+    <div>
+      <div class="benne-name">Benne Hart</div>
+      <div class="benne-title">Mentor · Brave Feelings Lab</div>
+      <div class="benne-speech" id="final-speech">You came in with anxiety and you're leaving with tools, knowledge, and a plan. Keep going — one brave step at a time.</div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /screen-wrap -->
+</div><!-- /app -->
+
+<!-- BOTTOM NAV -->
+<div id="bottom-nav">
+  <button class="btn-back" id="btn-back" onclick="goBack()" style="display:none">← Back</button>
+  <div style="margin-left:auto;display:flex;flex-direction:column;align-items:flex-end;gap:4px;">
+    <button class="btn-next" id="btn-next" onclick="goNext()">Let's Begin →</button>
+    <div class="btn-next-hint" id="gate-hint" style="opacity:0;transition:opacity .3s;"></div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
