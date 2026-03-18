@@ -5,7 +5,1563 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Social Anxiety Lab — A brave kid's guide to feeling okay around people. By Brave Feelings Lab.">
 <title>Social Anxiety Lab — Brave Feelings Lab</title>
-<link rel="stylesheet" href="styles.css">
+<style>
+/* ============================================================
+   SOCIAL ANXIETY LAB — BRAVE FEELINGS LAB
+   styles.css — Production Design System
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Fredoka+One&display=swap');
+
+/* ============================================================
+   CSS VARIABLES
+   ============================================================ */
+:root {
+  --teal: #0D9488;
+  --teal-light: #14B8A6;
+  --teal-pale: #CCFBF1;
+  --coral: #F87171;
+  --coral-pale: #FEE2E2;
+  --yellow: #F6B93B;
+  --yellow-pale: #FEF3C7;
+  --sky: #38BDF8;
+  --sky-pale: #E0F2FE;
+  --navy: #1E3A5F;
+  --navy-mid: #2D5282;
+  --cream: #FFF8F0;
+  --cream-dark: #F5EDE0;
+  --white: #FFFFFF;
+  --text-dark: #1E3A5F;
+  --text-mid: #4A6080;
+  --text-light: #8AA0B8;
+  --radius-sm: 12px;
+  --radius: 20px;
+  --radius-lg: 28px;
+  --shadow: 0 4px 24px rgba(30,58,95,0.10);
+  --shadow-lg: 0 12px 40px rgba(30,58,95,0.16);
+  --transition: all 0.32s cubic-bezier(0.4,0,0.2,1);
+}
+
+/* ============================================================
+   RESET & BASE
+   ============================================================ */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Nunito', sans-serif;
+  background: var(--cream);
+  color: var(--text-dark);
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+img { display: block; max-width: 100%; }
+button { cursor: pointer; }
+input, textarea { font-family: 'Nunito', sans-serif; }
+
+/* ============================================================
+   PROGRESS & CHROME
+   ============================================================ */
+#progress-wrap {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 5px;
+  background: rgba(30,58,95,0.08);
+  z-index: 300;
+}
+
+#progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--teal), var(--sky));
+  transition: width 0.5s cubic-bezier(0.4,0,0.2,1);
+  border-radius: 0 3px 3px 0;
+}
+
+#phase-label {
+  position: fixed;
+  top: 12px; right: 16px;
+  background: var(--navy);
+  color: var(--white);
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  border-radius: 20px;
+  z-index: 300;
+  transition: opacity .3s;
+}
+
+#screen-num {
+  position: fixed;
+  top: 12px; left: 16px;
+  background: rgba(255,255,255,0.9);
+  color: var(--text-light);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 20px;
+  z-index: 300;
+  backdrop-filter: blur(8px);
+}
+
+/* Resume Banner */
+#resume-banner {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(30,58,95,0.7);
+  z-index: 500;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  backdrop-filter: blur(4px);
+}
+
+#resume-card {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  padding: 32px 28px;
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+  box-shadow: var(--shadow-lg);
+}
+
+#resume-card h2 {
+  font-family: 'Fredoka One', cursive;
+  font-size: 26px;
+  color: var(--navy);
+  margin-bottom: 10px;
+}
+
+#resume-card p {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-mid);
+  line-height: 1.6;
+  margin-bottom: 22px;
+}
+
+.resume-btns { display: flex; flex-direction: column; gap: 10px; }
+
+.btn-resume {
+  background: var(--teal);
+  color: var(--white);
+  border: none;
+  border-radius: 50px;
+  padding: 14px;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  font-size: 15px;
+  box-shadow: 0 4px 18px rgba(13,148,136,.3);
+  transition: var(--transition);
+}
+.btn-resume:hover { background: var(--teal-light); transform: translateY(-2px); }
+
+.btn-restart {
+  background: transparent;
+  color: var(--text-light);
+  border: 2px solid var(--cream-dark);
+  border-radius: 50px;
+  padding: 12px;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  transition: var(--transition);
+}
+.btn-restart:hover { color: var(--text-mid); border-color: var(--text-light); }
+
+/* ============================================================
+   LAYOUT
+   ============================================================ */
+#app { min-height: 100vh; display: flex; flex-direction: column; }
+
+#screen-wrap {
+  flex: 1;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 48px 20px 110px;
+  min-height: 100vh;
+}
+
+/* ============================================================
+   SCREENS
+   ============================================================ */
+.screen {
+  display: none;
+  width: 100%;
+  max-width: 660px;
+  animation: fadeUp .45s cubic-bezier(0.4,0,0.2,1) forwards;
+}
+
+.screen.active { display: flex; flex-direction: column; }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ============================================================
+   BOTTOM NAVIGATION
+   ============================================================ */
+#bottom-nav {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  padding: 14px 20px 24px;
+  background: linear-gradient(to top, var(--cream) 65%, transparent);
+  display: flex;
+  align-items: center;
+  z-index: 200;
+}
+
+.btn-back {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  padding: 12px 18px;
+  border: none;
+  background: transparent;
+  color: var(--text-light);
+  border-radius: 50px;
+  transition: var(--transition);
+}
+.btn-back:hover { color: var(--text-mid); }
+
+.btn-next {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  font-size: 15px;
+  padding: 14px 36px;
+  border: none;
+  background: var(--teal);
+  color: var(--white);
+  border-radius: 50px;
+  box-shadow: 0 4px 18px rgba(13,148,136,.32);
+  transition: var(--transition);
+  margin-left: auto;
+}
+.btn-next:hover:not(:disabled) {
+  background: var(--teal-light);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(13,148,136,.4);
+}
+.btn-next:active:not(:disabled) { transform: scale(.97); }
+.btn-next:disabled {
+  background: var(--text-light);
+  box-shadow: none;
+  cursor: not-allowed;
+  transform: none;
+  opacity: 0.7;
+}
+
+.btn-next-hint {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-light);
+  text-align: center;
+  margin-top: 6px;
+  transition: var(--transition);
+}
+
+/* ============================================================
+   TYPOGRAPHY
+   ============================================================ */
+.page-title {
+  font-family: 'Fredoka One', cursive;
+  font-size: clamp(26px, 6vw, 40px);
+  color: var(--navy);
+  line-height: 1.15;
+  margin-bottom: 10px;
+}
+
+.page-subtitle {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-mid);
+  line-height: 1.65;
+  margin-bottom: 18px;
+}
+
+.section-tag {
+  font-size: 10px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  color: var(--teal);
+  margin-bottom: 8px;
+}
+
+.highlight { color: var(--teal); }
+
+/* ============================================================
+   CARDS
+   ============================================================ */
+.card {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  padding: 22px;
+  box-shadow: var(--shadow);
+  margin-bottom: 14px;
+}
+
+.card-teal  { background: linear-gradient(135deg, var(--teal-pale), #E6FFFA); border-left: 4px solid var(--teal); }
+.card-coral { background: linear-gradient(135deg, var(--coral-pale), #FFF1F2); border-left: 4px solid var(--coral); }
+.card-yellow{ background: linear-gradient(135deg, var(--yellow-pale), #FFFBEB); border-left: 4px solid var(--yellow); }
+.card-navy  { background: var(--navy); color: var(--white); border-radius: var(--radius-lg); padding: 22px; margin-bottom: 14px; }
+.card-sky   { background: linear-gradient(135deg, var(--sky-pale), #F0F9FF); border-left: 4px solid var(--sky); }
+
+/* ============================================================
+   BENNE COMPONENT
+   ============================================================ */
+.benne-box {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  padding: 18px;
+  box-shadow: var(--shadow);
+  margin: 14px 0;
+  position: relative;
+}
+
+.benne-box::before {
+  content: '';
+  position: absolute;
+  left: 58px; top: -9px;
+  width: 18px; height: 18px;
+  background: var(--white);
+  transform: rotate(45deg);
+  border-radius: 3px;
+}
+
+.benne-avatar {
+  width: 64px; height: 64px;
+  border-radius: 50%;
+  border: 3px solid var(--teal);
+  overflow: hidden;
+  flex-shrink: 0;
+  background: var(--teal-pale);
+}
+
+.benne-avatar img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: top;
+}
+
+.benne-name {
+  font-size: 10px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: var(--teal);
+  margin-bottom: 5px;
+}
+
+.benne-title {
+  font-size: 9px;
+  font-weight: 700;
+  color: var(--text-light);
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  margin-bottom: 6px;
+}
+
+.benne-speech {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-dark);
+  line-height: 1.65;
+}
+
+/* ============================================================
+   KEY ROWS
+   ============================================================ */
+.key-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--cream-dark);
+}
+.key-row:last-child { border-bottom: none; }
+
+.key-icon {
+  width: 38px; height: 38px;
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.key-text {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-dark);
+  line-height: 1.5;
+}
+
+/* ============================================================
+   DARK CARD
+   ============================================================ */
+.dark-card {
+  background: linear-gradient(135deg, var(--navy), var(--navy-mid));
+  border-radius: var(--radius-lg);
+  padding: 26px;
+  color: var(--white);
+  margin: 14px 0;
+  position: relative;
+  overflow: hidden;
+}
+.dark-card::after {
+  content: '';
+  position: absolute;
+  bottom: -30px; right: -30px;
+  width: 120px; height: 120px;
+  background: rgba(13,148,136,.15);
+  border-radius: 50%;
+}
+.dark-card-icon { font-size: 36px; margin-bottom: 10px; }
+.dark-card-title { font-family: 'Fredoka One', cursive; font-size: 20px; margin-bottom: 8px; color: var(--teal-light); }
+.dark-card-text  { font-size: 14px; font-weight: 600; line-height: 1.7; opacity: .9; }
+
+/* ============================================================
+   IMAGES
+   ============================================================ */
+.img-full {
+  width: 100%;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  margin: 14px 0;
+}
+
+.scene-img { width: 100%; border-radius: var(--radius-lg); margin: 14px 0; box-shadow: var(--shadow); overflow: hidden; }
+.scene-img img { width: 100%; }
+
+/* ============================================================
+   WELCOME SCREEN
+   ============================================================ */
+.welcome-hero { text-align: center; padding: 16px 0; }
+
+.welcome-badge {
+  display: inline-block;
+  background: var(--teal-pale);
+  color: var(--teal);
+  font-size: 10px; font-weight: 900;
+  letter-spacing: .12em; text-transform: uppercase;
+  padding: 5px 14px; border-radius: 20px;
+  margin-bottom: 18px;
+}
+
+.welcome-title {
+  font-family: 'Fredoka One', cursive;
+  font-size: clamp(34px, 8vw, 52px);
+  color: var(--navy);
+  line-height: 1.1;
+  margin-bottom: 8px;
+}
+
+.welcome-sub {
+  font-size: 16px; font-weight: 600;
+  color: var(--text-mid); line-height: 1.6;
+  margin-bottom: 20px;
+  max-width: 420px; margin-left: auto; margin-right: auto;
+}
+
+.welcome-benne {
+  width: 140px; height: 140px;
+  border-radius: 50%;
+  border: 4px solid var(--teal);
+  overflow: hidden;
+  margin: 0 auto 12px;
+  box-shadow: 0 8px 36px rgba(13,148,136,.22);
+  background: var(--teal-pale);
+}
+.welcome-benne img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+
+.mentor-tag {
+  display: inline-block;
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 6px 16px;
+  box-shadow: var(--shadow);
+  margin-bottom: 18px;
+}
+.mentor-tag-name { font-family: 'Fredoka One', cursive; font-size: 16px; color: var(--navy); }
+.mentor-tag-title { font-size: 10px; font-weight: 900; letter-spacing: .1em; text-transform: uppercase; color: var(--teal); }
+
+.welcome-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px; margin: 20px 0;
+}
+.stat-chip { background: var(--white); border-radius: var(--radius); padding: 14px 8px; text-align: center; box-shadow: var(--shadow); }
+.stat-num  { font-family: 'Fredoka One', cursive; font-size: 22px; color: var(--teal); }
+.stat-lbl  { font-size: 11px; font-weight: 700; color: var(--text-mid); margin-top: 2px; }
+
+/* ============================================================
+   NAME INPUT
+   ============================================================ */
+.name-input {
+  width: 100%;
+  font-family: 'Fredoka One', cursive;
+  font-size: 30px; color: var(--navy);
+  background: var(--white);
+  border: 3px solid var(--teal-pale);
+  border-radius: var(--radius);
+  padding: 18px 22px; outline: none;
+  transition: var(--transition);
+  text-align: center; margin: 20px 0;
+}
+.name-input:focus { border-color: var(--teal); box-shadow: 0 0 0 4px rgba(13,148,136,.1); }
+.name-input::placeholder { color: var(--text-light); font-size: 20px; }
+
+.name-greeting {
+  text-align: center;
+  font-family: 'Fredoka One', cursive;
+  font-size: 24px; color: var(--teal);
+  min-height: 36px; transition: var(--transition);
+}
+
+/* ============================================================
+   PROMISE SEAL
+   ============================================================ */
+.promise-seal-wrap { text-align: center; margin: 20px 0; }
+
+.promise-seal {
+  width: 130px; height: 130px;
+  border-radius: 50%;
+  margin: 0 auto 20px;
+  cursor: pointer;
+  transition: var(--transition);
+  overflow: hidden;
+  box-shadow: 0 0 0 10px var(--teal-pale), var(--shadow-lg);
+}
+.promise-seal img { width: 100%; height: 100%; object-fit: cover; }
+.promise-seal:hover { transform: scale(1.04); }
+.promise-seal.sealed { box-shadow: 0 0 0 10px var(--teal-pale), 0 0 0 20px rgba(13,148,136,.1), var(--shadow-lg); animation: sealPop .4s ease; }
+@keyframes sealPop { 0%{transform:scale(1)} 50%{transform:scale(1.15)} 100%{transform:scale(1)} }
+
+.promise-lines { background: var(--white); border-radius: var(--radius-lg); padding: 20px 22px; box-shadow: var(--shadow); }
+.promise-line {
+  font-size: 16px; font-weight: 700; color: var(--text-dark);
+  padding: 10px 0; border-bottom: 1px solid var(--cream-dark);
+  display: flex; align-items: center; gap: 12px;
+}
+.promise-line:last-child { border-bottom: none; }
+.promise-line::before { content: '◆'; color: var(--teal); font-size: 9px; flex-shrink: 0; }
+
+.seal-instruction { text-align: center; font-size: 13px; font-weight: 700; color: var(--text-light); margin-top: 14px; transition: var(--transition); }
+
+/* ============================================================
+   STAT REVEAL CARDS
+   ============================================================ */
+.stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 14px 0; }
+
+.stat-card {
+  background: var(--white); border-radius: var(--radius);
+  padding: 18px 14px; text-align: center; box-shadow: var(--shadow);
+  cursor: pointer; transition: var(--transition);
+  min-height: 100px; display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+}
+.stat-card:hover { transform: scale(1.02); }
+.stat-card.revealed { background: var(--teal); color: var(--white); }
+.stat-front { font-size: 26px; }
+.stat-back  { display: none; flex-direction: column; align-items: center; }
+.stat-card.revealed .stat-front { display: none; }
+.stat-card.revealed .stat-back  { display: flex; }
+.stat-big  { font-family: 'Fredoka One', cursive; font-size: 28px; color: var(--yellow); }
+.stat-desc { font-size: 12px; font-weight: 700; margin-top: 4px; line-height: 1.4; }
+.tap-hint  { text-align: center; font-size: 12px; font-weight: 700; color: var(--text-light); margin-top: 6px; }
+
+/* ============================================================
+   BODY MAP
+   ============================================================ */
+.body-map-wrap { display: flex; gap: 18px; align-items: flex-start; margin: 14px 0; }
+.body-map-fig  { flex-shrink: 0; width: 150px; position: relative; }
+.body-map-fig img { width: 100%; display: block; }
+
+.hotspot {
+  position: absolute;
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  border: 3px solid var(--coral);
+  background: rgba(248,113,113,.18);
+  cursor: pointer; transition: var(--transition);
+  display: flex; align-items: center; justify-content: center;
+  transform: translate(-50%, -50%);
+}
+.hotspot:hover, .hotspot.active { background: var(--coral); }
+.hotspot.active { animation: pulse 1.5s infinite; }
+@keyframes pulse {
+  0%,100% { box-shadow: 0 0 0 0 rgba(248,113,113,.4); }
+  50%      { box-shadow: 0 0 0 8px rgba(248,113,113,0); }
+}
+
+.body-map-info { flex: 1; }
+.body-selected { background: var(--white); border-radius: var(--radius); padding: 14px; box-shadow: var(--shadow); margin-bottom: 10px; min-height: 80px; }
+.body-selected-title { font-size: 11px; font-weight: 900; text-transform: uppercase; letter-spacing: .1em; color: var(--coral); margin-bottom: 6px; }
+.body-selected-list { list-style: none; }
+.body-selected-list li { font-size: 13px; font-weight: 600; color: var(--text-dark); padding: 3px 0; display: flex; align-items: center; gap: 6px; }
+.body-selected-list li::before { content: '●'; color: var(--coral); font-size: 7px; }
+.body-count { font-family: 'Fredoka One', cursive; font-size: 18px; color: var(--teal); text-align: center; margin-top: 8px; }
+
+/* ============================================================
+   FINGERPRINT
+   ============================================================ */
+.fingerprint-card { background: linear-gradient(135deg, var(--navy), var(--navy-mid)); border-radius: var(--radius-lg); padding: 24px; color: var(--white); text-align: center; margin: 14px 0; }
+.fingerprint-title { font-family: 'Fredoka One', cursive; font-size: 22px; color: var(--teal-light); margin-bottom: 14px; }
+.fingerprint-zones { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin: 14px 0; }
+.fzone { background: rgba(255,255,255,.12); border-radius: 50px; padding: 7px 14px; font-size: 12px; font-weight: 700; color: var(--white); }
+.fzone.active { background: var(--teal); }
+
+/* ============================================================
+   TRIGGER GRID
+   ============================================================ */
+.trigger-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 14px 0; }
+
+.trigger-card {
+  background: var(--white); border-radius: var(--radius);
+  padding: 14px 10px; text-align: center; box-shadow: var(--shadow);
+  cursor: pointer; transition: var(--transition);
+  border: 2px solid transparent;
+}
+.trigger-card:hover  { border-color: var(--teal-pale); transform: translateY(-2px); }
+.trigger-card.selected { border-color: var(--teal); background: var(--teal-pale); }
+.trigger-card.selected .trigger-label { color: var(--teal); }
+
+.trigger-img   { width: 60px; height: 60px; border-radius: 12px; object-fit: cover; margin: 0 auto 8px; display: block; }
+.trigger-label { font-size: 11px; font-weight: 700; color: var(--text-mid); line-height: 1.3; }
+.trigger-count-label { text-align: center; font-size: 13px; font-weight: 700; color: var(--text-light); margin-top: 6px; }
+
+/* ============================================================
+   SORT ACTIVITY
+   ============================================================ */
+.sort-item { background: var(--white); border-radius: var(--radius); padding: 14px; box-shadow: var(--shadow); margin-bottom: 10px; border: 2px solid transparent; transition: var(--transition); }
+.sort-item-text { font-size: 14px; font-weight: 600; color: var(--text-dark); margin-bottom: 8px; }
+.sort-btns { display: flex; gap: 8px; }
+.sort-btn { flex: 1; padding: 8px; border: none; border-radius: 10px; font-family: 'Nunito', sans-serif; font-weight: 700; font-size: 12px; cursor: pointer; transition: var(--transition); }
+.sort-btn-cat { background: var(--coral-pale); color: var(--coral); }
+.sort-btn-con { background: var(--teal-pale);  color: var(--teal); }
+.sort-btn:hover { transform: scale(1.02); }
+.sort-item.answered-cat { border-color: var(--coral); background: var(--coral-pale); }
+.sort-item.answered-con { border-color: var(--teal);  background: var(--teal-pale); }
+.sort-result { font-size: 12px; font-weight: 700; margin-top: 8px; display: none; line-height: 1.5; }
+.sort-item.answered-cat .sort-result, .sort-item.answered-con .sort-result { display: block; }
+
+/* ============================================================
+   DETECTIVE QUESTIONS
+   ============================================================ */
+.detective-q { display: flex; align-items: flex-start; gap: 12px; padding: 14px; background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow); margin-bottom: 12px; }
+.detective-num { width: 32px; height: 32px; border-radius: 50%; background: var(--teal); color: var(--white); display: flex; align-items: center; justify-content: center; font-family: 'Fredoka One', cursive; font-size: 16px; flex-shrink: 0; }
+.detective-text { font-size: 14px; font-weight: 600; color: var(--text-dark); line-height: 1.55; }
+
+/* ============================================================
+   THOUGHT REWRITE
+   ============================================================ */
+.thought-original { background: var(--coral-pale); border-radius: var(--radius); padding: 16px; margin-bottom: 12px; border-left: 4px solid var(--coral); }
+.thought-original-label { font-size: 10px; font-weight: 900; text-transform: uppercase; letter-spacing: .1em; color: var(--coral); margin-bottom: 6px; }
+.thought-original-text { font-size: 15px; font-weight: 700; color: var(--text-dark); }
+.thought-new { background: var(--white); border-radius: var(--radius); padding: 16px; box-shadow: var(--shadow); }
+.thought-new-label { font-size: 10px; font-weight: 900; text-transform: uppercase; letter-spacing: .1em; color: var(--teal); margin-bottom: 8px; }
+.thought-textarea { width: 100%; border: 2px solid var(--teal-pale); border-radius: 12px; padding: 12px; font-family: 'Nunito', sans-serif; font-size: 14px; font-weight: 600; color: var(--text-dark); resize: none; outline: none; transition: var(--transition); min-height: 90px; background: var(--cream); }
+.thought-textarea:focus { border-color: var(--teal); background: var(--white); }
+
+/* ============================================================
+   BREATHING
+   ============================================================ */
+.breathing-container { text-align: center; margin: 14px 0; }
+.breath-circle { width: 180px; height: 180px; border-radius: 50%; border: 6px solid var(--teal); background: var(--teal-pale); display: flex; flex-direction: column; align-items: center; justify-content: center; margin: 0 auto 20px; transition: all 1s ease; }
+.breath-circle.inhale { transform: scale(1.2); background: var(--sky-pale);    border-color: var(--sky); }
+.breath-circle.hold   { transform: scale(1.2); background: var(--yellow-pale); border-color: var(--yellow); }
+.breath-circle.exhale { transform: scale(0.9); background: var(--teal-pale);   border-color: var(--teal); }
+.breath-count  { font-family: 'Fredoka One', cursive; font-size: 48px; color: var(--navy); line-height: 1; }
+.breath-phase  { font-size: 12px; font-weight: 700; color: var(--text-mid); text-transform: uppercase; letter-spacing: .1em; margin-top: 4px; }
+.breath-rounds { font-size: 13px; font-weight: 700; color: var(--text-light); margin-bottom: 14px; }
+.breath-start  { font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 15px; padding: 14px 32px; border: none; background: var(--teal); color: var(--white); border-radius: 50px; box-shadow: 0 4px 18px rgba(13,148,136,.3); transition: var(--transition); }
+.breath-start:hover { background: var(--teal-light); transform: translateY(-2px); }
+
+/* ============================================================
+   GROUNDING
+   ============================================================ */
+.grounding-steps { list-style: none; }
+.grounding-step { background: var(--white); border-radius: var(--radius); padding: 14px 16px; margin-bottom: 10px; box-shadow: var(--shadow); display: flex; align-items: center; gap: 14px; }
+.grounding-num  { width: 36px; height: 36px; border-radius: 50%; background: var(--teal); color: var(--white); display: flex; align-items: center; justify-content: center; font-family: 'Fredoka One', cursive; font-size: 18px; flex-shrink: 0; }
+.grounding-sense { font-size: 14px; font-weight: 700; color: var(--text-dark); }
+.grounding-input { width: 100%; border: 2px solid var(--teal-pale); border-radius: 10px; padding: 8px 12px; font-size: 13px; font-weight: 600; outline: none; transition: var(--transition); background: var(--cream); color: var(--text-dark); margin-top: 6px; }
+.grounding-input:focus { border-color: var(--teal); background: var(--white); }
+
+/* ============================================================
+   SAFE SENTENCE
+   ============================================================ */
+.safe-card-img { width: 220px; display: block; margin: 14px auto; filter: drop-shadow(0 8px 24px rgba(30,58,95,.12)); }
+.safe-option { background: var(--white); border-radius: var(--radius); padding: 14px; box-shadow: var(--shadow); cursor: pointer; transition: var(--transition); border: 2px solid transparent; display: flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 600; color: var(--text-dark); margin-bottom: 8px; }
+.safe-option:hover  { border-color: var(--teal-pale); }
+.safe-option.selected { border-color: var(--teal); background: var(--teal-pale); color: var(--teal); }
+.safe-option::before { content: '○'; color: var(--text-light); font-size: 16px; }
+.safe-option.selected::before { content: '●'; color: var(--teal); }
+.safe-custom { width: 100%; border: 2px solid var(--teal-pale); border-radius: var(--radius); padding: 14px; font-size: 14px; font-weight: 600; outline: none; transition: var(--transition); background: var(--white); color: var(--text-dark); }
+.safe-custom:focus { border-color: var(--teal); }
+
+/* ============================================================
+   QUIZ
+   ============================================================ */
+.quiz-q { background: var(--white); border-radius: var(--radius-lg); padding: 20px; box-shadow: var(--shadow); margin-bottom: 14px; }
+.quiz-question { font-size: 15px; font-weight: 700; color: var(--text-dark); margin-bottom: 12px; }
+.quiz-options { display: flex; flex-direction: column; gap: 8px; }
+.quiz-opt { background: var(--cream); border-radius: 12px; padding: 11px 14px; font-size: 13px; font-weight: 600; color: var(--text-dark); cursor: pointer; transition: var(--transition); border: 2px solid transparent; text-align: left; font-family: 'Nunito', sans-serif; }
+.quiz-opt:hover { border-color: var(--teal-pale); }
+.quiz-opt.correct { background: var(--teal-pale); border-color: var(--teal); color: var(--teal); }
+.quiz-opt.wrong   { background: var(--coral-pale); border-color: var(--coral); color: var(--coral); }
+.quiz-feedback { font-size: 12px; font-weight: 700; margin-top: 8px; padding: 8px 12px; border-radius: 10px; display: none; line-height: 1.5; }
+.quiz-q.answered .quiz-feedback { display: block; }
+
+/* ============================================================
+   SCENARIO LAB
+   ============================================================ */
+.scenario-setup-img { width: 100%; border-radius: var(--radius-lg); margin: 0 0 14px; box-shadow: var(--shadow); }
+.scenario-setup-text { font-size: 15px; font-weight: 700; color: var(--text-dark); line-height: 1.6; padding: 16px; background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow); margin-bottom: 14px; }
+.scenario-choices { display: flex; flex-direction: column; gap: 10px; margin: 14px 0; }
+
+.choice-btn {
+  background: var(--white); border-radius: var(--radius); padding: 16px; box-shadow: var(--shadow);
+  cursor: pointer; transition: var(--transition); border: 2px solid transparent;
+  text-align: left; font-family: 'Nunito', sans-serif; font-size: 14px; font-weight: 700; color: var(--text-dark);
+}
+.choice-btn:hover:not(:disabled) { border-color: var(--teal-pale); transform: translateX(4px); }
+.choice-btn::before { content: '→ '; color: var(--teal); }
+.choice-btn.selected-brave { border-color: var(--teal);  background: var(--teal-pale); }
+.choice-btn.selected-small { border-color: var(--sky);   background: var(--sky-pale); }
+.choice-btn.selected-avoid { border-color: var(--coral); background: var(--coral-pale); }
+.choice-btn:disabled { opacity: .65; cursor: default; transform: none; }
+
+.scenario-outcome { background: var(--navy); color: var(--white); border-radius: var(--radius-lg); padding: 20px; margin-top: 14px; display: none; animation: fadeUp .4s ease; }
+.scenario-outcome.visible { display: block; }
+.outcome-badge { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 10px; font-weight: 900; text-transform: uppercase; letter-spacing: .1em; margin-bottom: 10px; }
+.badge-brave { background: var(--teal);   color: var(--white); }
+.badge-small { background: var(--sky);    color: var(--navy); }
+.badge-avoid { background: var(--coral);  color: var(--white); }
+.outcome-text { font-size: 14px; font-weight: 600; line-height: 1.65; opacity: .9; }
+
+.scenario-reflection { background: var(--yellow-pale); border-radius: var(--radius); padding: 14px; margin-top: 10px; border-left: 4px solid var(--yellow); font-size: 13px; font-weight: 600; color: var(--text-dark); display: none; }
+.scenario-reflection.visible { display: block; }
+
+/* ============================================================
+   BRAVE LADDER
+   ============================================================ */
+.ladder-inputs { margin: 14px 0; }
+.ladder-rung { background: var(--white); border-radius: var(--radius); padding: 14px 16px; margin-bottom: 10px; box-shadow: var(--shadow); display: flex; align-items: center; gap: 12px; }
+.rung-num { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Fredoka One', cursive; font-size: 16px; color: var(--white); flex-shrink: 0; }
+.rung-1 { background: var(--coral); }
+.rung-2 { background: var(--yellow); }
+.rung-3 { background: var(--sky); }
+.rung-4 { background: var(--teal); }
+.rung-5 { background: var(--navy); }
+.rung-input { flex: 1; border: 2px solid var(--cream-dark); border-radius: 10px; padding: 8px 12px; font-size: 13px; font-weight: 600; outline: none; transition: var(--transition); background: var(--cream); color: var(--text-dark); }
+.rung-input:focus { border-color: var(--teal); background: var(--white); }
+
+/* ============================================================
+   FIRST BRAVE STEP
+   ============================================================ */
+.first-step-card { background: linear-gradient(135deg, var(--teal), var(--teal-light)); border-radius: var(--radius-lg); padding: 24px; color: var(--white); text-align: center; margin: 14px 0; }
+.first-step-card h3 { font-family: 'Fredoka One', cursive; font-size: 24px; margin-bottom: 10px; }
+.first-step-display { background: rgba(255,255,255,.2); border-radius: var(--radius); padding: 14px; font-size: 16px; font-weight: 700; min-height: 50px; margin-top: 10px; }
+.commit-check { display: flex; align-items: center; gap: 12px; background: var(--white); border-radius: var(--radius); padding: 16px; box-shadow: var(--shadow); margin-top: 14px; cursor: pointer; }
+.commit-checkbox { width: 24px; height: 24px; border-radius: 6px; border: 3px solid var(--teal-pale); flex-shrink: 0; display: flex; align-items: center; justify-content: center; transition: var(--transition); }
+.commit-checkbox.checked { background: var(--teal); border-color: var(--teal); }
+.commit-checkbox.checked::after { content: '✓'; color: var(--white); font-size: 14px; font-weight: 900; }
+.commit-text { font-size: 14px; font-weight: 600; color: var(--text-dark); }
+
+/* ============================================================
+   CONVERSATION CARDS
+   ============================================================ */
+.convo-deck { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 14px 0; }
+.convo-card { border-radius: var(--radius); padding: 16px; cursor: pointer; transition: var(--transition); text-align: center; box-shadow: var(--shadow); position: relative; }
+.convo-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
+.convo-card.favorited::after { content: '★'; position: absolute; top: 8px; right: 10px; color: var(--yellow); font-size: 16px; }
+.convo-starter { font-size: 13px; font-weight: 700; line-height: 1.5; }
+
+/* ============================================================
+   HELP SCALE
+   ============================================================ */
+.help-scale { display: flex; flex-direction: column; gap: 8px; margin: 14px 0; }
+.help-level { background: var(--white); border-radius: var(--radius); padding: 14px; box-shadow: var(--shadow); display: flex; align-items: center; gap: 12px; }
+.help-dot { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; }
+.help-text { font-size: 13px; font-weight: 600; color: var(--text-dark); line-height: 1.5; }
+.trusted-input { width: 100%; border: 2px solid var(--teal-pale); border-radius: var(--radius); padding: 14px 16px; font-size: 15px; font-weight: 600; outline: none; transition: var(--transition); background: var(--white); color: var(--text-dark); text-align: center; margin-top: 8px; }
+.trusted-input:focus { border-color: var(--teal); }
+
+/* ============================================================
+   SELF NOTE
+   ============================================================ */
+.self-note-prompts { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0; }
+.note-prompt { background: var(--cream-dark); border-radius: 20px; padding: 5px 12px; font-size: 11px; font-weight: 700; color: var(--text-mid); cursor: pointer; transition: var(--transition); }
+.note-prompt:hover { background: var(--teal-pale); color: var(--teal); }
+.self-note-area { width: 100%; border: 2px solid var(--teal-pale); border-radius: var(--radius); padding: 16px; font-size: 14px; font-weight: 600; color: var(--text-dark); resize: none; outline: none; transition: var(--transition); min-height: 130px; background: var(--white); line-height: 1.7; }
+.self-note-area:focus { border-color: var(--teal); }
+
+/* ============================================================
+   LEARNED ITEMS
+   ============================================================ */
+.learned-burst { width: 200px; display: block; margin: 0 auto 14px; }
+.learned-items { display: flex; flex-direction: column; gap: 10px; margin: 14px 0; }
+.learned-item { background: var(--white); border-radius: var(--radius); padding: 16px; box-shadow: var(--shadow); cursor: pointer; transition: var(--transition); border: 2px solid transparent; overflow: hidden; max-height: 56px; }
+.learned-item.revealed { max-height: 300px; border-color: var(--teal); }
+.learned-item-header { display: flex; align-items: center; gap: 12px; }
+.learned-num { width: 30px; height: 30px; border-radius: 50%; background: var(--teal); color: var(--white); display: flex; align-items: center; justify-content: center; font-family: 'Fredoka One', cursive; font-size: 15px; flex-shrink: 0; }
+.learned-title { font-size: 14px; font-weight: 700; color: var(--text-dark); }
+.learned-detail { font-size: 13px; font-weight: 600; color: var(--text-mid); line-height: 1.6; margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--cream-dark); display: none; }
+.learned-item.revealed .learned-detail { display: block; }
+.tap-reveal-hint { text-align: center; font-size: 12px; font-weight: 700; color: var(--text-light); margin-top: 6px; }
+
+/* ============================================================
+   ROADMAP
+   ============================================================ */
+.roadmap-wrap { position: relative; border-radius: var(--radius-lg); overflow: hidden; margin: 14px 0; }
+.roadmap-wrap img { width: 100%; display: block; }
+.roadmap-phases-overlay { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: space-around; padding: 16px 20px; }
+.phase-chips { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+.phase-chip { border-radius: 50px; padding: 6px 14px; font-size: 11px; font-weight: 800; box-shadow: var(--shadow); }
+.phase-chip.done { background: var(--teal); color: var(--white); }
+.phase-chip.final { background: var(--yellow); color: var(--navy); }
+
+/* ============================================================
+   CERTIFICATE
+   ============================================================ */
+.cert-wrap { position: relative; margin: 14px 0; }
+.cert-bg { width: 100%; display: block; border-radius: var(--radius-lg); box-shadow: var(--shadow-lg); }
+.cert-content { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 24px; text-align: center; }
+.cert-title    { font-family: 'Fredoka One', cursive; font-size: clamp(16px,3.5vw,24px); color: var(--navy); margin-bottom: 2px; }
+.cert-subtitle { font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: .12em; color: var(--text-mid); margin-bottom: 10px; }
+.cert-name     { font-family: 'Fredoka One', cursive; font-size: clamp(20px,4.5vw,32px); color: var(--teal); margin-bottom: 6px; }
+.cert-sentence { font-size: 11px; font-weight: 700; color: var(--navy); max-width: 280px; font-style: italic; line-height: 1.5; margin-bottom: 4px; }
+.cert-note-text{ font-size: 10px; font-weight: 600; color: var(--text-mid); max-width: 260px; font-style: italic; line-height: 1.4; margin-bottom: 6px; }
+.cert-date     { font-size: 10px; font-weight: 700; color: var(--text-light); margin-bottom: 6px; }
+.cert-benne    { width: 56px; height: 56px; border-radius: 50%; border: 3px solid var(--teal); overflow: hidden; margin: 4px auto 0; }
+.cert-benne img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+.cert-mentor   { font-size: 9px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--text-light); margin-top: 3px; }
+
+.print-btn { font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 14px; padding: 12px 28px; border: none; background: var(--yellow); color: var(--navy); border-radius: 50px; box-shadow: 0 4px 18px rgba(246,185,59,.4); transition: var(--transition); margin-top: 14px; width: 100%; }
+.print-btn:hover { transform: translateY(-2px); }
+
+/* ============================================================
+   CHECKIN BACKGROUND
+   ============================================================ */
+.checkin-hero { border-radius: var(--radius-lg); overflow: hidden; position: relative; margin: 14px 0; }
+.checkin-hero img { width: 100%; display: block; max-height: 130px; object-fit: cover; }
+.checkin-hero-text { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-family: 'Fredoka One', cursive; font-size: 22px; color: var(--navy); text-shadow: 0 2px 8px rgba(255,255,255,.8); }
+
+.trigger-compare { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 14px 0; }
+.compare-col { background: var(--white); border-radius: var(--radius); padding: 14px; box-shadow: var(--shadow); }
+.compare-header { font-size: 10px; font-weight: 900; text-transform: uppercase; letter-spacing: .1em; margin-bottom: 10px; }
+.compare-before { color: var(--coral); }
+.compare-after  { color: var(--teal); }
+.compare-item { font-size: 12px; font-weight: 600; color: var(--text-dark); padding: 5px 0; border-bottom: 1px solid var(--cream-dark); display: flex; align-items: center; gap: 6px; line-height: 1.4; }
+.compare-item:last-child { border-bottom: none; }
+
+/* ============================================================
+   PRINT STYLES
+   ============================================================ */
+@media print {
+  #progress-wrap, #phase-label, #screen-num, #bottom-nav, #resume-banner { display: none !important; }
+  body { background: white; }
+  #screen-wrap { padding: 0; }
+  /* screen display controlled by .active class */
+  #s34 { display: flex !important; }
+  .cert-wrap { page-break-inside: avoid; }
+  .benne-box, .print-btn { display: none !important; }
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 480px) {
+  .trigger-grid { grid-template-columns: repeat(3, 1fr); }
+  .trigger-img  { width: 48px; height: 48px; }
+  .trigger-label{ font-size: 10px; }
+  .body-map-fig { width: 120px; }
+  .welcome-title{ font-size: 38px; }
+  .stat-grid    { grid-template-columns: 1fr 1fr; }
+  .convo-deck   { grid-template-columns: 1fr; }
+}
+
+@media (min-width: 768px) {
+  #screen-wrap { padding: 60px 40px 120px; }
+  .page-title  { font-size: 42px; }
+}
+
+/* ============================================================
+   PROGRAM HEADER — Confidence Spark style
+   ============================================================ */
+#sal-header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 52px;
+  background: var(--white);
+  border-bottom: 1px solid var(--cream-dark);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 18px;
+  z-index: 400;
+  box-shadow: 0 2px 12px rgba(30,58,95,0.07);
+}
+
+#header-title {
+  font-family: 'Fredoka One', cursive;
+  font-size: 16px;
+  color: var(--teal);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+#header-icon { font-size: 14px; }
+
+#header-center {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  justify-content: center;
+}
+
+#menu-btn {
+  background: none;
+  border: 1.5px solid var(--cream-dark);
+  border-radius: 8px;
+  padding: 5px 10px;
+  font-size: 16px;
+  color: var(--text-mid);
+  cursor: pointer;
+  transition: var(--transition);
+  line-height: 1;
+}
+#menu-btn:hover { border-color: var(--teal); color: var(--teal); }
+
+#page-counter {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-mid);
+  white-space: nowrap;
+}
+
+#header-progress-wrap {
+  width: 120px;
+  height: 6px;
+  background: var(--cream-dark);
+  border-radius: 3px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+#header-progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--teal), var(--teal-light));
+  border-radius: 3px;
+  transition: width 0.5s ease;
+  width: 3%;
+}
+
+/* Adjust screen-wrap top padding for new header */
+#screen-wrap { padding-top: 68px; }
+
+/* Hide old chrome elements */
+#progress-wrap, #phase-label, #screen-num { display: none !important; }
+
+/* ============================================================
+   PROGRAM MENU SIDEBAR
+   ============================================================ */
+#menu-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(30,58,95,0.4);
+  z-index: 490;
+  display: none;
+  backdrop-filter: blur(2px);
+}
+#menu-overlay.open { display: block; }
+
+#program-menu {
+  position: fixed;
+  top: 0; right: 0;
+  width: 320px;
+  max-width: 90vw;
+  height: 100vh;
+  background: var(--white);
+  z-index: 500;
+  display: flex;
+  flex-direction: column;
+  box-shadow: -4px 0 32px rgba(30,58,95,0.15);
+  transform: translateX(100%);
+  transition: transform 0.32s cubic-bezier(0.4,0,0.2,1);
+}
+#program-menu.open { transform: translateX(0); }
+
+#menu-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 20px 14px;
+  border-bottom: 1px solid var(--cream-dark);
+  flex-shrink: 0;
+}
+
+#menu-title {
+  font-family: 'Fredoka One', cursive;
+  font-size: 18px;
+  color: var(--navy);
+}
+
+#menu-close {
+  background: none;
+  border: none;
+  font-size: 18px;
+  color: var(--text-light);
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 6px;
+  transition: var(--transition);
+}
+#menu-close:hover { color: var(--navy); background: var(--cream-dark); }
+
+/* GOTO */
+#menu-goto-wrap {
+  padding: 16px 20px 12px;
+  border-bottom: 1px solid var(--cream-dark);
+  flex-shrink: 0;
+}
+
+.menu-section-label {
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--text-light);
+  margin-bottom: 8px;
+}
+
+#menu-goto-select {
+  width: 100%;
+  border: 1.5px solid var(--cream-dark);
+  border-radius: 10px;
+  padding: 9px 12px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-dark);
+  background: var(--cream);
+  outline: none;
+  cursor: pointer;
+  margin-bottom: 8px;
+  transition: var(--transition);
+}
+#menu-goto-select:focus { border-color: var(--teal); }
+
+#menu-goto-btn {
+  width: 100%;
+  background: var(--teal);
+  color: var(--white);
+  border: none;
+  border-radius: 10px;
+  padding: 10px;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  font-size: 14px;
+  cursor: pointer;
+  transition: var(--transition);
+}
+#menu-goto-btn:hover { background: var(--teal-light); }
+
+/* JOURNEY LIST */
+#menu-journey {
+  flex: 1;
+  overflow-y: auto;
+  padding: 14px 20px;
+}
+
+.menu-phase-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 14px 0 6px;
+}
+
+.menu-phase-name {
+  font-size: 10px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: var(--navy);
+}
+
+.menu-phase-status {
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 20px;
+  background: var(--cream-dark);
+  color: var(--text-light);
+}
+.menu-phase-status.in-progress { background: var(--teal-pale); color: var(--teal); }
+.menu-phase-status.complete    { background: var(--teal); color: var(--white); }
+
+.menu-item {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-mid);
+  padding: 7px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: var(--transition);
+  margin-bottom: 2px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.menu-item::before { content: '○'; font-size: 9px; color: var(--text-light); flex-shrink: 0; }
+.menu-item:hover   { background: var(--cream); color: var(--text-dark); }
+.menu-item.active  { background: var(--teal-pale); color: var(--teal); font-weight: 700; }
+.menu-item.active::before { content: '●'; color: var(--teal); }
+.menu-item.visited { color: var(--text-dark); }
+.menu-item.visited::before { content: '✓'; color: var(--teal); font-size: 10px; }
+
+/* MENU ACTIONS */
+#menu-actions {
+  padding: 14px 20px 24px;
+  border-top: 1px solid var(--cream-dark);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.menu-action-btn {
+  width: 100%;
+  background: none;
+  border: 1.5px solid var(--cream-dark);
+  border-radius: 10px;
+  padding: 10px;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--text-mid);
+  cursor: pointer;
+  transition: var(--transition);
+}
+.menu-action-btn:hover { border-color: var(--text-light); color: var(--text-dark); }
+.menu-action-logoff { color: var(--teal); border-color: var(--teal-pale); }
+.menu-action-logoff:hover { background: var(--teal-pale); }
+.menu-action-exit { color: var(--coral); border-color: var(--coral-pale); }
+.menu-action-exit:hover { background: var(--coral-pale); }
+
+@media (max-width: 480px) {
+  #header-title { font-size: 13px; }
+  #header-progress-wrap { width: 70px; }
+  #program-menu { width: 100vw; }
+}
+
+/* ============================================================
+   PASSWORD GATE
+   ============================================================ */
+#pw-gate {
+  position: fixed;
+  inset: 0;
+  background: var(--cream);
+  z-index: 9999;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+#pw-gate.active {
+  display: flex;
+}
+
+#pw-card {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  padding: 36px 32px;
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+  box-shadow: var(--shadow-lg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+#pw-logo {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  border: 3px solid var(--teal);
+  overflow: hidden;
+  margin-bottom: 16px;
+  box-shadow: 0 4px 20px rgba(13,148,136,.2);
+}
+#pw-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+}
+
+#pw-program-name {
+  font-family: 'Fredoka One', cursive;
+  font-size: 26px;
+  color: var(--navy);
+  margin-bottom: 4px;
+}
+
+#pw-brand {
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 20px;
+}
+
+#pw-instruction {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-mid);
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+#pw-input {
+  width: 100%;
+  border: 2px solid var(--teal-pale);
+  border-radius: var(--radius);
+  padding: 14px 18px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-dark);
+  text-align: center;
+  outline: none;
+  transition: var(--transition);
+  margin-bottom: 8px;
+  letter-spacing: 0.08em;
+}
+#pw-input:focus {
+  border-color: var(--teal);
+  box-shadow: 0 0 0 4px rgba(13,148,136,.1);
+}
+
+#pw-error {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--coral);
+  min-height: 20px;
+  margin-bottom: 8px;
+  opacity: 0;
+  transition: opacity .3s;
+}
+
+#pw-btn {
+  width: 100%;
+  background: var(--teal);
+  color: var(--white);
+  border: none;
+  border-radius: 50px;
+  padding: 15px;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 0 4px 18px rgba(13,148,136,.32);
+  transition: var(--transition);
+  margin-bottom: 16px;
+}
+#pw-btn:hover {
+  background: var(--teal-light);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(13,148,136,.4);
+}
+
+#pw-hint {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-light);
+  line-height: 1.5;
+  max-width: 280px;
+}
+
+/* ============================================================
+   REFINEMENT PASS — P1 DESKTOP LAYOUT
+   ============================================================ */
+
+/* Center content with max-width on large screens */
+@media (min-width: 900px) {
+  #screen-wrap {
+    padding: 80px 60px 120px;
+    align-items: flex-start;
+  }
+
+  .screen {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  /* Welcome screen two-column layout on desktop */
+  #s1 .welcome-hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: center;
+    text-align: left;
+  }
+
+  #s1 .welcome-benne-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #s1 .welcome-title { font-size: 52px; }
+  #s1 .welcome-sub   { margin-left: 0; margin-right: 0; }
+  #s1 .welcome-badge { display: inline-block; }
+
+  /* Scenario images cap height on desktop */
+  .scenario-setup-img { max-height: 320px; object-fit: cover; }
+
+  /* Body map wider on desktop */
+  .body-map-fig { width: 180px; }
+
+  /* Header wider padding */
+  #sal-header { padding: 0 40px; }
+  #header-progress-wrap { width: 200px; }
+
+  /* Bottom nav centered */
+  #bottom-nav { padding: 16px 40px 28px; }
+}
+
+/* ============================================================
+   REFINEMENT PASS — P2 ACCESSIBILITY
+   ============================================================ */
+
+/* Visible focus states for all interactive elements */
+:focus-visible {
+  outline: 3px solid var(--teal);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+/* Focus for buttons specifically */
+button:focus-visible {
+  outline: 3px solid var(--teal);
+  outline-offset: 3px;
+}
+
+/* Focus for cards that act as buttons */
+.stat-card:focus-visible,
+.trigger-card:focus-visible,
+.safe-option:focus-visible,
+.choice-btn:focus-visible,
+.learned-item:focus-visible,
+.convo-card:focus-visible,
+.sort-btn:focus-visible {
+  outline: 3px solid var(--teal);
+  outline-offset: 2px;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .screen { animation: none; }
+  .hotspot.active { animation: none; }
+}
+
+/* ============================================================
+   REFINEMENT PASS — P3 GATE HINT IMPROVEMENTS
+   ============================================================ */
+
+/* Gate hint styling — warm not scolding */
+#gate-hint {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--teal);
+  text-align: right;
+  min-height: 18px;
+  transition: opacity .4s;
+  padding: 0 4px;
+  background: var(--teal-pale);
+  border-radius: 20px;
+  padding: 4px 12px;
+  display: inline-block;
+}
+
+/* ============================================================
+   REFINEMENT PASS — P5 SAVE REASSURANCE
+   ============================================================ */
+
+#save-indicator {
+  position: fixed;
+  bottom: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(13,148,136,0.1);
+  border: 1px solid var(--teal-pale);
+  border-radius: 20px;
+  padding: 5px 14px;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--teal);
+  z-index: 150;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity .5s;
+  white-space: nowrap;
+}
+#save-indicator.visible { opacity: 1; }
+
+/* ============================================================
+   REFINEMENT PASS — P6 MICRO-CELEBRATION TOAST
+   ============================================================ */
+
+#phase-toast {
+  position: fixed;
+  top: 70px;
+  left: 50%;
+  transform: translateX(-50%) translateY(-10px);
+  background: var(--navy);
+  color: var(--white);
+  border-radius: var(--radius-lg);
+  padding: 14px 24px;
+  font-size: 14px;
+  font-weight: 700;
+  text-align: center;
+  z-index: 250;
+  opacity: 0;
+  transition: opacity .4s ease, transform .4s ease;
+  pointer-events: none;
+  box-shadow: var(--shadow-lg);
+  max-width: 320px;
+  width: 90vw;
+}
+#phase-toast.visible {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ============================================================
+   REFINEMENT PASS — P7 PARENT SUMMARY SCREEN
+   ============================================================ */
+
+.parent-summary-header {
+  background: linear-gradient(135deg, var(--navy), var(--navy-mid));
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  color: var(--white);
+  margin-bottom: 16px;
+  text-align: center;
+}
+.parent-summary-header h2 {
+  font-family: 'Fredoka One', cursive;
+  font-size: 22px;
+  color: var(--teal-light);
+  margin-bottom: 8px;
+}
+.parent-summary-header p {
+  font-size: 13px;
+  font-weight: 600;
+  opacity: .85;
+  line-height: 1.6;
+}
+
+.summary-section {
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 16px 20px;
+  box-shadow: var(--shadow);
+  margin-bottom: 12px;
+}
+.summary-section-label {
+  font-size: 10px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  color: var(--teal);
+  margin-bottom: 8px;
+}
+.summary-section-content {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-dark);
+  line-height: 1.65;
+}
+.summary-tag {
+  display: inline-block;
+  background: var(--teal-pale);
+  color: var(--teal);
+  border-radius: 20px;
+  padding: 4px 12px;
+  font-size: 12px;
+  font-weight: 700;
+  margin: 3px;
+}
+.summary-tag-coral {
+  background: var(--coral-pale);
+  color: var(--coral);
+}
+
+.parent-print-btn {
+  width: 100%;
+  background: none;
+  border: 2px solid var(--navy);
+  border-radius: 50px;
+  padding: 13px;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  font-size: 14px;
+  color: var(--navy);
+  cursor: pointer;
+  transition: var(--transition);
+  margin-top: 8px;
+}
+.parent-print-btn:hover { background: var(--navy); color: var(--white); }
+
+/* ============================================================
+   REFINEMENT PASS — P8 CERTIFICATE ENHANCEMENT
+   ============================================================ */
+
+.cert-strength {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--teal);
+  background: var(--teal-pale);
+  border-radius: 20px;
+  padding: 5px 14px;
+  margin-bottom: 4px;
+  display: inline-block;
+}
+
+/* Print: show parent summary too */
+@media print {
+  #s35 { display: flex !important; }
+  .parent-print-btn { display: none !important; }
+}
+
+#resume-banner.active { display: flex; }
+
+</style>
 </head>
 <body>
 
@@ -967,6 +2523,1152 @@
   </div>
 </div>
 
-<script src="script.js"></script>
+<script>
+/* ============================================================
+   SOCIAL ANXIETY LAB — BRAVE FEELINGS LAB
+   script.js — Production Logic
+   ============================================================ */
+
+// ============================================================
+// STATE
+// ============================================================
+const DEFAULT_STATE = {
+  current: 1,
+  name: '',
+  sealSealed: false,
+  bodyParts: {},
+  triggers: [],
+  safeSentence: '',
+  rungs: ['','','','',''],
+  rungOne: '',
+  selfNote: '',
+  trustedAdult: '',
+  committed: false,
+  scenarioChoices: {},
+  breathingComplete: false,
+  quizAnswers: {},
+  sortAnswers: {},
+  thoughtRewrite: '',
+  groundingInputs: {},
+  favCards: [],
+  allStatsRevealed: false,
+  learnedRevealed: []
+};
+
+let S = JSON.parse(JSON.stringify(DEFAULT_STATE));
+
+const STORAGE_KEY = 'sal_brave_feelings_v1';
+
+// ============================================================
+// PHASE MAP & LABELS
+// ============================================================
+const PHASES = {
+  1:'Welcome', 2:'Welcome', 3:'Welcome',
+  4:'Phase 1 · Understanding', 5:'Phase 1 · Understanding',
+  6:'Phase 1 · Understanding', 7:'Phase 1 · Understanding',
+  8:'Phase 1 · Understanding', 9:'Phase 1 · Understanding',
+  10:'Phase 2 · Thought Traps', 11:'Phase 2 · Thought Traps',
+  12:'Phase 2 · Thought Traps', 13:'Phase 2 · Thought Traps',
+  14:'Phase 2 · Thought Traps',
+  15:'Phase 3 · Calm Toolkit', 16:'Phase 3 · Calm Toolkit',
+  17:'Phase 3 · Calm Toolkit', 18:'Phase 3 · Calm Toolkit',
+  19:'Phase 3 · Calm Toolkit',
+  20:'Phase 4 · Brave Steps', 21:'Phase 4 · Brave Steps',
+  22:'Phase 4 · Brave Steps', 23:'Phase 4 · Brave Steps',
+  24:'Phase 4 · Brave Steps', 25:'Phase 4 · Brave Steps',
+  26:'Phase 4 · Brave Steps',
+  27:'Phase 5 · Relationships', 28:'Phase 5 · Relationships',
+  29:'Phase 5 · Relationships', 30:'Phase 5 · Relationships',
+  31:'Phase 6 · Completion', 32:'Phase 6 · Completion',
+  33:'Phase 6 · Completion', 34:'Phase 6 · Complete'
+};
+
+const NEXT_LABELS = {
+  1: "Let's Begin →",
+  3: "I Make This Promise →",
+  34: "Done ✓"
+};
+
+// Gate screens require specific completion before advancing
+// key = screenNum, value = function that returns true if complete
+const GATES = {
+  2:  () => S.name.trim().length >= 2,
+  3:  () => S.sealSealed,
+  7:  () => Object.keys(S.bodyParts).length >= 1,
+  9:  () => S.triggers.length >= 1,
+  16: () => S.breathingComplete,
+  18: () => S.safeSentence.trim().length >= 3,
+  25: () => S.rungs[0].trim().length >= 3,
+  26: () => S.committed,
+  29: () => S.trustedAdult.trim().length >= 2,
+  30: () => S.selfNote.trim().length >= 10
+};
+
+const GATE_HINTS = {
+  2:  'Please enter your name to continue.',
+  3:  'Tap the seal to make your promise.',
+  7:  'Tap at least one area on the body map.',
+  9:  'Select at least one trigger.',
+  16: 'Complete at least one breathing round to continue.',
+  18: 'Choose or write your safe sentence.',
+  25: 'Fill in Rung 1 — your smallest brave step.',
+  26: 'Tap the checkbox to make your commitment.',
+  29: 'Enter the name of one trusted adult.',
+  30: 'Write at least a few words to your future self.'
+};
+
+// ============================================================
+// TRIGGER LABELS
+// ============================================================
+const TRIGGER_LABELS = {
+  'raising-hand':    'Raising my hand',
+  'meeting-someone': 'Meeting new people',
+  'being-called-on': 'Being called on',
+  'eating-around-others': 'Eating around others',
+  'performing':      'Performing or presenting',
+  'phone-calls':     'Making phone calls',
+  'left-out':        'Feeling left out',
+  'answering-door':  'Answering the door',
+  'making-mistakes': 'Making mistakes publicly'
+};
+
+// ============================================================
+// SCENARIO DATA
+// ============================================================
+const SCENARIO_DATA = {
+  21: {
+    brave: { badge:'Brave Move', cls:'badge-brave', text:'You raised your hand. Whether the answer was right or not, you tried — and that rewires your brain. Here\'s what most kids don\'t know: everyone else moved on within 30 seconds. Nobody remembers.', speech:'That moment of choosing to try despite the fear? That is courage. And it gets easier every single time you do it.' },
+    small: { badge:'Small Brave Step', cls:'badge-small', text:'Writing it down means you engaged instead of shutting down. You didn\'t avoid — you adapted. That\'s real progress and a legitimate brave step.', speech:'This is a wise place to start. Next time you might take it one step further. But this step matters too.' },
+    avoid: { badge:'Avoidance Path', cls:'badge-avoid', text:'The relief felt real — but it was borrowed. The fear of raising your hand is now a fraction larger than before. That\'s how avoidance builds quietly over time.', speech:'This is the most honest answer, and I respect that. Now that you see the pattern clearly, you have the power to change it.' }
+  },
+  22: {
+    brave: { badge:'Brave Move', cls:'badge-brave', text:'"Hi" back and maybe their name. That\'s how nearly every friendship in history has started — one small exchange that felt terrifying in the moment.', speech:'The other kid probably felt relieved too. Connection always starts with someone going first.' },
+    small: { badge:'Small Brave Step', cls:'badge-small', text:'A smile and a nod is real human communication. It says "I see you and I\'m open." That\'s meaningful — and it\'s a genuine brave step.', speech:'A small signal is still a signal. You kept the door open. That\'s not nothing — that\'s something.' },
+    avoid: { badge:'Avoidance Path', cls:'badge-avoid', text:'It felt safer. But the other child may have walked away feeling rejected — not knowing the anxiety that made you look away. Avoidance has ripples beyond just us.', speech:'The hardest habit to change. But you\'ve seen it clearly now — and awareness is step one.' }
+  },
+  23: {
+    brave: { badge:'Brave Move', cls:'badge-brave', text:'"Can I play?" — three of the most terrifying words in childhood, and they work far more often than anxiety predicts. Most kids say yes.', speech:'I know that took everything you had. That is exactly what brave looks like — not comfortable, but doing it anyway.' },
+    small: { badge:'Small Brave Step', cls:'badge-small', text:'One-on-one is almost always easier than a group. Finding one person is smart, strategic bravery — not avoidance.', speech:'This is wise bravery. You didn\'t freeze. You found a workable path in. That counts.' },
+    avoid: { badge:'Avoidance Path', cls:'badge-avoid', text:'Being alone hurt. And yet it felt safer than risking rejection. That trade-off is at the heart of social anxiety.', speech:'You felt what you felt. The goal isn\'t to pretend it doesn\'t hurt — it\'s to know that next time you have tools.' }
+  },
+  24: {
+    brave: { badge:'Brave Move', cls:'badge-brave', text:'You kept going. That\'s mistake recovery — arguably the most important social skill there is, and almost nobody teaches it. Most people around you were already thinking about something else entirely.', speech:'That chin-up moment is what I\'m most proud of. That\'s the skill that will carry you through life.' },
+    small: { badge:'Small Brave Step', cls:'badge-small', text:'"Oops" and moving on is healthy, mature, and actually signals confidence — even when you don\'t feel confident inside. It says "I can handle this."', speech:'That is one of the best possible responses anyone can give. Acknowledge it lightly and keep moving. Well done.' },
+    avoid: { badge:'Avoidance Path', cls:'badge-avoid', text:'The urge to disappear is real and completely understandable. But every child who has ever answered wrong in class — every single one — survived it. So will you.', speech:'It hurts in the moment. But the moment always passes. And next time, you\'ll have a plan.' }
+  }
+};
+
+// ============================================================
+// PERSISTENCE — LOCALSTORAGE
+// ============================================================
+function saveState() {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(S));
+  } catch(e) {
+    console.warn('localStorage save failed:', e);
+  }
+  if (typeof showSaveIndicator === 'function') showSaveIndicator();
+}
+
+function loadState() {
+  try {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) {
+      const parsed = JSON.parse(saved);
+      S = Object.assign(JSON.parse(JSON.stringify(DEFAULT_STATE)), parsed);
+      return true;
+    }
+  } catch(e) {
+    console.warn('localStorage load failed:', e);
+  }
+  return false;
+}
+
+function clearState() {
+  try { localStorage.removeItem(STORAGE_KEY); } catch(e) {}
+  S = JSON.parse(JSON.stringify(DEFAULT_STATE));
+}
+
+// ============================================================
+// NAVIGATION
+// ============================================================
+function goNext() {
+  if (S.current === 34) return;
+  captureCurrentScreen();
+  if (!checkGate(S.current)) return;
+  navigateTo(S.current + 1);
+}
+
+function goBack() {
+  if (S.current <= 1) return;
+  captureCurrentScreen();
+  navigateTo(S.current - 1);
+}
+
+function navigateTo(n) {
+  const old = document.getElementById('s' + S.current);
+  if (old) old.classList.remove('active');
+  S.current = n;
+  saveState();
+  const screen = document.getElementById('s' + n);
+  if (screen) {
+    screen.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+  updateChrome();
+  onScreenEnter(n);
+  showPhaseToast(n);
+  updatePageCounter();
+}
+
+function checkGate(n) {
+  if (!GATES[n]) return true;
+  if (GATES[n]()) return true;
+  showGateHint(n);
+  return false;
+}
+
+function showGateHint(n) {
+  const hint = document.getElementById('gate-hint');
+  if (!hint) return;
+  hint.textContent = GATE_HINTS[n] || 'Please complete this step first.';
+  hint.style.opacity = '1';
+  setTimeout(() => { hint.style.opacity = '0'; }, 3000);
+}
+
+// ============================================================
+// CHROME UPDATE
+// ============================================================
+function updateChrome() {
+  const n = S.current;
+  const pct = Math.round((n / 34) * 100);
+
+  // Legacy progress bar (hidden via CSS but keep for safety)
+  const pb = document.getElementById('progress-bar');
+  if (pb) pb.style.width = pct + '%';
+
+  // New header progress bar
+  const hpb = document.getElementById('header-progress-bar');
+  if (hpb) hpb.style.width = pct + '%';
+
+  // New page counter
+  const pn = document.getElementById('page-num');
+  if (pn) pn.textContent = n;
+
+  const back = document.getElementById('btn-back');
+  if (back) back.style.display = n > 1 ? 'block' : 'none';
+
+  const next = document.getElementById('btn-next');
+  if (next) next.textContent = NEXT_LABELS[n] || 'Continue →';
+
+  updateNextState(n);
+}
+
+function updateNextState(n) {
+  const next = document.getElementById('btn-next');
+  const hint = document.getElementById('gate-hint');
+  if (!next) return;
+  if (GATES[n] && !GATES[n]()) {
+    next.disabled = true;
+    if (hint) {
+      hint.textContent = GATE_HINTS[n] || '';
+      hint.style.opacity = '1';
+    }
+  } else {
+    next.disabled = false;
+    if (hint) {
+      hint.textContent = '';
+      hint.style.opacity = '0';
+    }
+  }
+}
+
+// ============================================================
+// SCREEN ENTRY LOGIC
+// ============================================================
+function onScreenEnter(n) {
+  switch(n) {
+    case 2:  restoreName(); break;
+    case 3:  restorePromise(); break;
+    case 7:  restoreBodyMap(); break;
+    case 8:  buildFingerprint(); break;
+    case 9:  restoreTriggers(); break;
+    case 14: buildThoughtRewrite(); break;
+    case 16: restoreBreathing(); break;
+    case 18: restoreSafeSentence(); break;
+    case 25: restoreLadder(); break;
+    case 26: buildFirstStep(); break;
+    case 29: restoreTrustedAdult(); break;
+    case 30: restoreSelfNote(); break;
+    case 31: buildCheckin(); break;
+    case 32: buildLearnedSummary(); break;
+    case 33: buildRoadmap(); break;
+    case 34: buildCertificate(); break;
+    case 35: buildParentSummary(); break;
+  }
+}
+
+// ============================================================
+// CAPTURE SCREEN DATA
+// ============================================================
+function captureCurrentScreen() {
+  const n = S.current;
+  switch(n) {
+    case 2:  captureNameScreen(); break;
+    case 14: captureThoughtRewrite(); break;
+    case 25: captureLadder(); break;
+    case 29: S.trustedAdult = (document.getElementById('trusted-adult') || {}).value || S.trustedAdult; break;
+    case 30: S.selfNote = (document.getElementById('self-note') || {}).value || S.selfNote; break;
+  }
+  saveState();
+}
+
+// ============================================================
+// SCREEN 2 — NAME
+// ============================================================
+function captureNameScreen() {
+  const v = (document.getElementById('name-input') || {}).value || '';
+  if (v.trim()) S.name = v.trim();
+}
+
+function restoreName() {
+  const inp = document.getElementById('name-input');
+  if (inp && S.name) {
+    inp.value = S.name;
+    updateGreeting();
+  }
+}
+
+function updateGreeting() {
+  const val = (document.getElementById('name-input') || {}).value.trim();
+  S.name = val;
+  const g = document.getElementById('name-greeting');
+  if (g) g.textContent = val ? 'Nice to meet you, ' + val + '! 👋' : '';
+  updateNextState(2);
+  saveState();
+}
+
+// ============================================================
+// SCREEN 3 — PROMISE
+// ============================================================
+function restorePromise() {
+  if (S.sealSealed) {
+    const seal = document.getElementById('promise-seal');
+    const inst = document.getElementById('seal-instruction');
+    if (seal) seal.classList.add('sealed');
+    if (inst) { inst.textContent = '✓ Promise made! You\'re ready to begin.'; inst.style.color = 'var(--teal)'; }
+  }
+}
+
+function sealPromise() {
+  const seal = document.getElementById('promise-seal');
+  const inst = document.getElementById('seal-instruction');
+  if (!seal) return;
+  seal.classList.add('sealed');
+  S.sealSealed = true;
+  if (inst) { inst.textContent = '✓ Promise made! You\'re ready to begin.'; inst.style.color = 'var(--teal)'; }
+  updateNextState(3);
+  saveState();
+}
+
+// ============================================================
+// SCREEN 5 — STAT CARDS
+// ============================================================
+function revealStat(el) {
+  el.classList.toggle('revealed');
+  saveState();
+}
+
+// ============================================================
+// SCREEN 7 — BODY MAP
+// ============================================================
+const HOTSPOT_DATA = {
+  'Head':    'Racing thoughts, feeling dizzy, can\'t concentrate',
+  'Throat':  'Tight feeling, hard to speak, voice feels shaky',
+  'Chest':   'Heart beating fast, tight chest, hard to breathe',
+  'Stomach': 'Butterflies, nausea, stomach feels knotted',
+  'Hands':   'Sweaty, shaky, fidgety — need to do something',
+  'Legs':    'Shaky, frozen, strong urge to run away'
+};
+
+function restoreBodyMap() {
+  const parts = Object.keys(S.bodyParts);
+  if (!parts.length) return;
+  document.querySelectorAll('.hotspot').forEach(hs => {
+    if (S.bodyParts[hs.dataset.part]) hs.classList.add('active');
+  });
+  updateBodyList();
+}
+
+function toggleHotspot(el, name, desc) {
+  el.classList.toggle('active');
+  if (el.classList.contains('active')) S.bodyParts[name] = desc;
+  else delete S.bodyParts[name];
+  updateBodyList();
+  updateNextState(7);
+  saveState();
+}
+
+function updateBodyList() {
+  const list = document.getElementById('body-list');
+  const countEl = document.getElementById('body-count');
+  const parts = Object.keys(S.bodyParts);
+  if (!list) return;
+  if (!parts.length) {
+    list.innerHTML = '<li style="color:var(--text-light);font-style:italic">Tap the body to begin...</li>';
+    if (countEl) countEl.textContent = '';
+    return;
+  }
+  list.innerHTML = parts.map(p => '<li>' + p + '</li>').join('');
+  if (countEl) countEl.textContent = parts.length + ' area' + (parts.length > 1 ? 's' : '') + ' identified';
+}
+
+// ============================================================
+// SCREEN 8 — FINGERPRINT
+// ============================================================
+function buildFingerprint() {
+  const nameEl = document.getElementById('fp-name');
+  if (nameEl) nameEl.textContent = (S.name || 'Your') + '\'s Anxiety Pattern';
+
+  const zones = document.getElementById('fp-zones');
+  if (!zones) return;
+  zones.innerHTML = '';
+  const allZones = ['Body signals','Nervous energy','Racing thoughts','Social worry','Avoidance urge','Performance fear','Anticipatory dread'];
+  const active = Math.min(allZones.length, Object.keys(S.bodyParts).length + 1 + (S.triggers.length > 2 ? 2 : S.triggers.length));
+  allZones.forEach((z, i) => {
+    const d = document.createElement('div');
+    d.className = 'fzone' + (i < active ? ' active' : '');
+    d.textContent = z;
+    zones.appendChild(d);
+  });
+}
+
+// ============================================================
+// SCREEN 9 — TRIGGERS
+// ============================================================
+function restoreTriggers() {
+  document.querySelectorAll('.trigger-card').forEach(card => {
+    if (S.triggers.includes(card.dataset.trigger)) card.classList.add('selected');
+  });
+  updateTriggerCount();
+}
+
+function toggleTrigger(el, id) {
+  el.classList.toggle('selected');
+  const idx = S.triggers.indexOf(id);
+  if (idx > -1) S.triggers.splice(idx, 1);
+  else S.triggers.push(id);
+  updateTriggerCount();
+  updateNextState(9);
+  saveState();
+}
+
+function updateTriggerCount() {
+  const el = document.getElementById('trigger-count');
+  if (el) el.textContent = S.triggers.length + ' selected';
+}
+
+// ============================================================
+// SCREEN 12 — SORT
+// ============================================================
+const SORT_ANSWERS = {
+  'sort-1': { correct:'cat', msg:'Catastrophe — "forever" is Worry Brain. People forget within minutes, not years.' },
+  'sort-2': { correct:'con', msg:'Real concern — nervousness before speaking in public is completely normal and valid.' },
+  'sort-3': { correct:'cat', msg:'Catastrophe — this is Worry Brain\'s most dramatic story. Evidence consistently says otherwise.' }
+};
+
+function sortItem(id, choice) {
+  const item = document.getElementById(id);
+  if (!item || item.classList.contains('answered-cat') || item.classList.contains('answered-con')) return;
+  S.sortAnswers[id] = choice;
+  const data = SORT_ANSWERS[id];
+  const isRight = choice === data.correct;
+  item.classList.add(choice === 'cat' ? 'answered-cat' : 'answered-con');
+  const result = document.getElementById(id + '-result');
+  if (result) {
+    result.textContent = (isRight ? '✓ ' : '→ ') + data.msg;
+    result.style.color = isRight ? 'var(--teal)' : 'var(--coral)';
+  }
+  item.querySelectorAll('.sort-btn').forEach(b => b.disabled = true);
+  saveState();
+}
+
+// ============================================================
+// SCREEN 14 — THOUGHT REWRITE
+// ============================================================
+function buildThoughtRewrite() {
+  const thoughtEl = document.getElementById('anxious-thought');
+  if (!thoughtEl) return;
+  const triggerThoughts = {
+    'raising-hand':    '"Everyone will notice if my answer is wrong and judge me for it."',
+    'meeting-someone': '"They won\'t like me or find me interesting enough to talk to."',
+    'being-called-on': '"My mind will go blank and everyone will think I\'m not smart."',
+    'performing':      '"I\'ll mess up and everyone will remember it forever."',
+    'left-out':        '"There must be something wrong with me that makes people not want to include me."',
+    'making-mistakes': '"If I make a mistake in front of others I won\'t be able to handle the embarrassment."'
+  };
+  const firstTrigger = S.triggers[0];
+  if (firstTrigger && triggerThoughts[firstTrigger]) {
+    thoughtEl.textContent = triggerThoughts[firstTrigger];
+  }
+  const textarea = document.getElementById('thought-rewrite-input');
+  if (textarea && S.thoughtRewrite) textarea.value = S.thoughtRewrite;
+}
+
+function captureThoughtRewrite() {
+  const ta = document.getElementById('thought-rewrite-input');
+  if (ta) S.thoughtRewrite = ta.value;
+}
+
+// ============================================================
+// SCREEN 16 — BREATHING
+// ============================================================
+let breathInterval = null;
+let breathPhaseIdx = 0;
+let breathCount = 4;
+let breathRound = 0;
+const BREATH_PHASES = ['Breathe In','Hold','Breathe Out','Hold'];
+const BREATH_CLASSES = ['inhale','hold','exhale','hold'];
+
+function restoreBreathing() {
+  if (S.breathingComplete) {
+    const circle = document.getElementById('breath-circle');
+    const phaseEl = document.getElementById('breath-phase');
+    const countEl = document.getElementById('breath-count');
+    const btn = document.getElementById('breath-btn');
+    const rounds = document.getElementById('round-num');
+    if (circle) circle.className = 'breath-circle';
+    if (phaseEl) phaseEl.textContent = 'Done! ✓';
+    if (countEl) countEl.textContent = '😌';
+    if (rounds) rounds.textContent = '3';
+    if (btn) { btn.textContent = 'Do It Again'; btn.style.display = 'block'; btn.onclick = resetBreathing; }
+  }
+}
+
+function resetBreathing() {
+  breathPhaseIdx = 0; breathRound = 0;
+  clearInterval(breathInterval); breathInterval = null;
+  const rounds = document.getElementById('round-num');
+  const btn = document.getElementById('breath-btn');
+  if (rounds) rounds.textContent = '0';
+  if (btn) btn.style.display = 'none';
+  runBreathPhase();
+}
+
+function startBreathing() {
+  if (breathInterval) return;
+  document.getElementById('breath-btn').style.display = 'none';
+  breathRound = 0; breathPhaseIdx = 0;
+  runBreathPhase();
+}
+
+function runBreathPhase() {
+  const circle = document.getElementById('breath-circle');
+  const countEl = document.getElementById('breath-count');
+  const phaseEl = document.getElementById('breath-phase');
+  const roundEl = document.getElementById('round-num');
+  if (!circle) return;
+
+  circle.className = 'breath-circle ' + BREATH_CLASSES[breathPhaseIdx];
+  if (phaseEl) phaseEl.textContent = BREATH_PHASES[breathPhaseIdx];
+
+  let count = 4;
+  if (countEl) countEl.textContent = count;
+
+  breathInterval = setInterval(() => {
+    count--;
+    if (countEl) countEl.textContent = count;
+    if (count <= 0) {
+      clearInterval(breathInterval);
+      breathInterval = null;
+      breathPhaseIdx = (breathPhaseIdx + 1) % 4;
+      if (breathPhaseIdx === 0) {
+        breathRound++;
+        if (roundEl) roundEl.textContent = breathRound;
+        if (breathRound >= 3) {
+          if (circle) circle.className = 'breath-circle';
+          if (phaseEl) phaseEl.textContent = 'Done! ✓';
+          if (countEl) countEl.textContent = '😌';
+          S.breathingComplete = true;
+          updateNextState(16);
+          saveState();
+          const btn = document.getElementById('breath-btn');
+          if (btn) { btn.textContent = 'Do It Again'; btn.style.display = 'block'; btn.onclick = resetBreathing; }
+          return;
+        }
+      }
+      runBreathPhase();
+    }
+  }, 1000);
+}
+
+// ============================================================
+// SCREEN 18 — SAFE SENTENCE
+// ============================================================
+function restoreSafeSentence() {
+  if (!S.safeSentence) return;
+  let matched = false;
+  document.querySelectorAll('.safe-option').forEach(opt => {
+    if (opt.dataset.sentence === S.safeSentence) { opt.classList.add('selected'); matched = true; }
+  });
+  if (!matched) {
+    const custom = document.getElementById('safe-custom');
+    if (custom) custom.value = S.safeSentence;
+  }
+}
+
+function selectSafe(el, text) {
+  document.querySelectorAll('.safe-option').forEach(o => o.classList.remove('selected'));
+  el.classList.add('selected');
+  S.safeSentence = text;
+  const custom = document.getElementById('safe-custom');
+  if (custom) custom.value = '';
+  updateNextState(18);
+  saveState();
+}
+
+function customSafe(el) {
+  document.querySelectorAll('.safe-option').forEach(o => o.classList.remove('selected'));
+  S.safeSentence = el.value.trim();
+  updateNextState(18);
+  saveState();
+}
+
+// ============================================================
+// SCREEN 19 — QUIZ
+// ============================================================
+function answerQuiz(qid, el, result) {
+  const q = document.getElementById(qid);
+  if (!q || q.classList.contains('answered')) return;
+  q.classList.add('answered');
+  el.classList.add(result);
+  S.quizAnswers[qid] = result;
+  const fb = q.querySelector('.quiz-feedback');
+  if (fb) {
+    fb.style.background = result === 'correct' ? 'var(--teal-pale)' : 'var(--coral-pale)';
+    fb.style.color      = result === 'correct' ? 'var(--teal)' : 'var(--coral)';
+  }
+  saveState();
+}
+
+// ============================================================
+// SCREENS 21–24 — SCENARIOS
+// ============================================================
+function chooseScenario(num, type, btn) {
+  const choices = document.getElementById('choices-' + num);
+  if (!choices) return;
+  choices.querySelectorAll('.choice-btn').forEach(b => { b.disabled = true; });
+  btn.classList.add('selected-' + type);
+  S.scenarioChoices[num] = type;
+  saveState();
+
+  const data = SCENARIO_DATA[num][type];
+  const outcome = document.getElementById('outcome-' + num);
+  const badge   = document.getElementById('badge-' + num);
+  const textEl  = document.getElementById('outcome-text-' + num);
+  if (badge)  { badge.className = 'outcome-badge ' + data.cls; badge.textContent = data.badge; }
+  if (textEl) textEl.textContent = data.text;
+  if (outcome) outcome.classList.add('visible');
+
+  setTimeout(() => {
+    const reflect = document.getElementById('reflect-' + num);
+    if (reflect) reflect.classList.add('visible');
+    const benneBox = document.getElementById('benne-' + num);
+    const speech   = document.getElementById('benne-speech-' + num);
+    if (speech) speech.textContent = data.speech;
+    if (benneBox) benneBox.style.display = 'flex';
+  }, 600);
+}
+
+// ============================================================
+// SCREEN 25 — BRAVE LADDER
+// ============================================================
+function restoreLadder() {
+  S.rungs.forEach((val, i) => {
+    const inp = document.getElementById('rung' + (i+1));
+    if (inp && val) inp.value = val;
+  });
+}
+
+function captureLadder() {
+  S.rungs = S.rungs.map((_, i) => {
+    const inp = document.getElementById('rung' + (i+1));
+    return inp ? inp.value.trim() : '';
+  });
+  S.rungOne = S.rungs[0];
+  updateNextState(25);
+}
+
+function onRungInput() {
+  captureLadder();
+  saveState();
+}
+
+// ============================================================
+// SCREEN 26 — FIRST STEP
+// ============================================================
+function buildFirstStep() {
+  captureLadder();
+  const display = document.getElementById('first-step-display');
+  if (display) display.textContent = S.rungs[0] || 'Go back and fill in Rung 1 of your Brave Ladder!';
+  const box = document.getElementById('commit-box');
+  if (box) box.classList.toggle('checked', S.committed);
+}
+
+function toggleCommit() {
+  S.committed = !S.committed;
+  const box = document.getElementById('commit-box');
+  if (box) box.classList.toggle('checked', S.committed);
+  updateNextState(26);
+  saveState();
+}
+
+// ============================================================
+// SCREEN 28 — CONVERSATION CARDS
+// ============================================================
+function toggleFav(el, idx) {
+  el.classList.toggle('favorited');
+  const fi = S.favCards.indexOf(idx);
+  if (fi > -1) S.favCards.splice(fi, 1);
+  else S.favCards.push(idx);
+  saveState();
+}
+
+// ============================================================
+// SCREEN 30 — NOTE PROMPTS
+// ============================================================
+function addPrompt(text) {
+  const area = document.getElementById('self-note');
+  if (!area) return;
+  if (area.value && !area.value.endsWith('\n')) area.value += '\n';
+  area.value += text + ' ';
+  area.focus();
+  S.selfNote = area.value;
+  updateNextState(30);
+  saveState();
+}
+
+function onNoteInput() {
+  S.selfNote = (document.getElementById('self-note') || {}).value || '';
+  updateNextState(30);
+  saveState();
+}
+
+function restoreSelfNote() {
+  const area = document.getElementById('self-note');
+  if (area && S.selfNote) area.value = S.selfNote;
+}
+
+function restoreTrustedAdult() {
+  const inp = document.getElementById('trusted-adult');
+  if (inp && S.trustedAdult) inp.value = S.trustedAdult;
+}
+
+// ============================================================
+// SCREEN 31 — CHECK-IN (DEEP PERSONALIZATION)
+// ============================================================
+function buildCheckin() {
+  const beforeList = document.getElementById('before-list');
+  if (!beforeList) return;
+  if (S.triggers.length) {
+    beforeList.innerHTML = S.triggers.slice(0, 5).map(t =>
+      '<div class="compare-item" style="color:var(--coral)">😰 ' + (TRIGGER_LABELS[t] || t) + '</div>'
+    ).join('');
+  } else {
+    beforeList.innerHTML = '<div class="compare-item" style="color:var(--text-light)">Your triggers</div>';
+  }
+
+  // Personalized headline
+  const headline = document.getElementById('checkin-headline');
+  if (headline && S.name) headline.textContent = S.name + ', look how far you\'ve come. ✨';
+}
+
+// ============================================================
+// SCREEN 32 — LEARNED (PERSONALIZED)
+// ============================================================
+function buildLearnedSummary() {
+  // Restore revealed states
+  S.learnedRevealed.forEach(idx => {
+    const items = document.querySelectorAll('.learned-item');
+    if (items[idx]) items[idx].classList.add('revealed');
+  });
+
+  // Personalize detail text with their data
+  const detail0 = document.getElementById('learned-detail-0');
+  if (detail0 && S.triggers.length) {
+    detail0.textContent = 'For you specifically, triggers like "' + (TRIGGER_LABELS[S.triggers[0]] || S.triggers[0]) + '" activate the alarm. Knowing this means you can prepare instead of react.';
+  }
+  const detail2 = document.getElementById('learned-detail-2');
+  if (detail2 && S.safeSentence) {
+    detail2.textContent = 'Your personal anchor is: "' + S.safeSentence + '" — say it whenever the alarm fires.';
+  }
+  const detail3 = document.getElementById('learned-detail-3');
+  if (detail3 && S.rungOne) {
+    detail3.textContent = 'Your Rung 1 — "' + S.rungOne + '" — is your first real-world practice target. Every time you try it, your brain updates its threat model.';
+  }
+}
+
+function revealLearned(el, idx) {
+  el.classList.toggle('revealed');
+  const i = S.learnedRevealed.indexOf(idx);
+  if (i > -1) S.learnedRevealed.splice(i, 1);
+  else S.learnedRevealed.push(idx);
+  saveState();
+}
+
+// ============================================================
+// SCREEN 33 — ROADMAP (PERSONALIZED)
+// ============================================================
+function buildRoadmap() {
+  const speech = document.getElementById('roadmap-speech');
+  if (speech) {
+    const n = S.name || 'You';
+    const sc = Object.keys(S.scenarioChoices).length;
+    speech.textContent = n + ', you completed all 34 screens — including ' + sc + ' scenario lab' + (sc !== 1 ? 's' : '') + ' where you made real choices under pressure. That took genuine commitment.';
+  }
+}
+
+// ============================================================
+// SCREEN 34 — CERTIFICATE (DEEP PERSONALIZATION)
+// ============================================================
+function buildCertificate() {
+  const nameEl = document.getElementById('cert-name');
+  if (nameEl) nameEl.textContent = S.name || 'Brave Kid';
+
+  const sentenceEl = document.getElementById('cert-sentence');
+  if (sentenceEl) sentenceEl.textContent = '"' + (S.safeSentence || 'I am brave even when I am scared.') + '"';
+
+  // Embed a snippet of their self-note
+  const noteEl = document.getElementById('cert-note-text');
+  if (noteEl) {
+    if (S.selfNote && S.selfNote.trim().length > 10) {
+      const snippet = S.selfNote.trim().substring(0, 80) + (S.selfNote.length > 80 ? '...' : '');
+      noteEl.textContent = snippet;
+    } else {
+      noteEl.style.display = 'none';
+    }
+  }
+
+  const dateEl = document.getElementById('cert-date');
+  if (dateEl) dateEl.textContent = 'Completed ' + new Date().toLocaleDateString('en-US', { year:'numeric', month:'long', day:'numeric' });
+
+  const finalSpeech = document.getElementById('final-speech');
+  if (finalSpeech) {
+    const n = S.name || 'You';
+    const t = S.trustedAdult ? ' Remember — ' + S.trustedAdult + ' is in your corner too.' : '';
+    finalSpeech.textContent = n + ', you came into this program with anxiety and no tools. You\'re leaving with knowledge, a calm toolkit, a brave ladder, and a plan.' + t + ' Keep going — one brave step at a time.';
+  }
+}
+
+// ============================================================
+// RESUME BANNER
+// ============================================================
+function showResumeBanner(savedScreen) {
+  const banner = document.getElementById('resume-banner');
+  const msg = document.getElementById('resume-msg');
+  if (!banner) return;
+  if (msg) msg.textContent = 'You were on Screen ' + savedScreen + ' of 35. Pick up where you left off?';
+  banner.classList.add('active');
+}
+
+function resumeSession() {
+  const banner = document.getElementById('resume-banner');
+  if (banner) banner.classList.remove('active');
+  navigateTo(S.current);
+}
+
+function restartSession() {
+  const banner = document.getElementById('resume-banner');
+  if (banner) banner.classList.remove('active');
+  clearState();
+  navigateTo(1);
+}
+
+// ============================================================
+// PASSWORD GATE
+// ============================================================
+const PROGRAM_PASSWORD = 'Proverb29Verse25$';
+const PW_KEY = 'sal_pw_unlocked_v1';
+
+function checkPassword() {
+  const input = document.getElementById('pw-input');
+  const error = document.getElementById('pw-error');
+  if (!input) return;
+  if (input.value.trim() === PROGRAM_PASSWORD) {
+    try { localStorage.setItem(PW_KEY, '1'); } catch(e) {}
+    const gate = document.getElementById('pw-gate');
+    if (gate) gate.classList.remove('active');
+    launchProgram();
+  } else {
+    if (error) {
+      error.textContent = 'Incorrect password. Please try again.';
+      error.style.opacity = '1';
+    }
+    input.value = '';
+    input.focus();
+  }
+}
+
+function handlePwKey(e) {
+  if (e.key === 'Enter') checkPassword();
+  const error = document.getElementById('pw-error');
+  if (error) error.style.opacity = '0';
+}
+
+// ============================================================
+// INIT
+// ============================================================
+function launchProgram() {
+  const hadSaved = loadState();
+  updateChrome();
+  const startScreen = document.getElementById('s1');
+  if (startScreen) startScreen.classList.add('active');
+  if (hadSaved && S.current > 1) {
+    showResumeBanner(S.current);
+  }
+}
+
+function init() {
+  let unlocked = false;
+  try { unlocked = localStorage.getItem(PW_KEY) === '1'; } catch(e) {}
+  const gate = document.getElementById('pw-gate');
+  if (unlocked) {
+    if (gate) gate.classList.remove('active');
+    launchProgram();
+  } else {
+    if (gate) gate.classList.add('active');
+    const input = document.getElementById('pw-input');
+    if (input) setTimeout(() => input.focus(), 100);
+  }
+}
+
+document.addEventListener('DOMContentLoaded', init);
+
+// ============================================================
+// EARLY HELPER FUNCTIONS (must be defined before first use)
+// ============================================================
+
+// (moved to early helpers section)
+// (moved to early helpers section)
+
+function showSaveIndicator() {
+  const el = document.getElementById('save-indicator');
+  if (!el) return;
+  el.classList.add('visible');
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(() => el.classList.remove('visible'), 2000);
+}
+
+// (moved to early helpers section)
+
+function showPhaseToast(screenNum) {
+  const data = PHASE_TOASTS[screenNum];
+  if (!data) return;
+  const el = document.getElementById('phase-toast');
+  if (!el) return;
+  el.innerHTML = data.emoji + ' ' + data.text;
+  el.classList.add('visible');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => el.classList.remove('visible'), 3500);
+}
+
+// (moved to early helpers section)
+
+
+// ============================================================
+// PROGRAM MENU — Confidence Spark Style
+// ============================================================
+
+const PHASE_RANGES = [
+  { id: 0, start: 1,  end: 3  },
+  { id: 1, start: 4,  end: 9  },
+  { id: 2, start: 10, end: 14 },
+  { id: 3, start: 15, end: 19 },
+  { id: 4, start: 20, end: 26 },
+  { id: 5, start: 27, end: 30 },
+  { id: 6, start: 31, end: 34 }
+];
+
+function toggleMenu() {
+  const menu = document.getElementById('program-menu');
+  const overlay = document.getElementById('menu-overlay');
+  const isOpen = menu.classList.contains('open');
+  if (isOpen) { closeMenu(); } else { openMenu(); }
+}
+
+function openMenu() {
+  document.getElementById('program-menu').classList.add('open');
+  document.getElementById('menu-overlay').classList.add('open');
+  updateMenuState();
+}
+
+function closeMenu() {
+  document.getElementById('program-menu').classList.remove('open');
+  document.getElementById('menu-overlay').classList.remove('open');
+}
+
+function updateMenuState() {
+  const n = S.current;
+
+  // Update goto select
+  const sel = document.getElementById('menu-goto-select');
+  if (sel) sel.value = n;
+
+  // Update menu items
+  document.querySelectorAll('.menu-item').forEach(item => {
+    const screenNum = parseInt(item.dataset.screen);
+    item.classList.remove('active','visited');
+    if (screenNum === n) item.classList.add('active');
+    else if (screenNum < n) item.classList.add('visited');
+  });
+
+  // Update phase status badges
+  PHASE_RANGES.forEach(phase => {
+    const el = document.getElementById('mps-' + phase.id);
+    if (!el) return;
+    el.className = 'menu-phase-status';
+    if (n > phase.end) {
+      el.textContent = 'COMPLETE';
+      el.classList.add('complete');
+    } else if (n >= phase.start) {
+      el.textContent = 'IN PROGRESS';
+      el.classList.add('in-progress');
+    } else {
+      el.textContent = 'NOT STARTED';
+    }
+  });
+}
+
+function menuGoTo() {
+  const sel = document.getElementById('menu-goto-select');
+  if (!sel) return;
+  const target = parseInt(sel.value);
+  if (target >= 1 && target <= 34) {
+    closeMenu();
+    navigateTo(target);
+  }
+}
+
+function menuNav(n) {
+  closeMenu();
+  navigateTo(n);
+}
+
+
+// ============================================================
+// REFINEMENT PASS — ALL PRIORITIES
+// ============================================================
+
+// ---- P3: Improved gate hint messages (warmer language) ----
+Object.assign(GATE_HINTS, {
+  2:  'Just need your name — even a nickname works! 😊',
+  3:  'Tap the seal when you\'re ready to make your promise.',
+  7:  'Tap any area on the body where you feel anxiety.',
+  9:  'Tap at least one situation that feels familiar to you.',
+  16: 'Complete all 3 breathing rounds — you\'re almost there!',
+  18: 'Choose or write your safe sentence to keep going.',
+  25: 'Fill in your first brave step — the smallest one counts.',
+  26: 'Tap the checkbox to commit — you\'re so close!',
+  29: 'Name one trusted adult in your life — just one is enough.',
+  30: 'Write just a few words to your future self to continue.'
+});
+
+// (moved to early helpers section)
+
+// (moved to early helpers section)
+
+// ---- P6: Phase transition toasts ----
+const PHASE_TOASTS = {
+  4:  { emoji: '🧠', text: 'Phase 1 unlocked — let\'s understand what\'s happening.' },
+  10: { emoji: '🔍', text: 'Phase 2 unlocked — time to investigate those anxious thoughts.' },
+  15: { emoji: '🌬️', text: 'Phase 3 unlocked — your calm toolkit is ready.' },
+  20: { emoji: '⭐', text: 'Phase 4 unlocked — now we practice brave steps.' },
+  27: { emoji: '🤝', text: 'Phase 5 unlocked — let\'s talk about connection.' },
+  31: { emoji: '🎉', text: 'Final phase — look how far you\'ve come!' }
+};
+
+let toastTimer = null;
+// (moved to early helpers section)
+
+// navigateTo already includes toast and counter calls above
+
+// ---- P7: Parent Summary Screen (S35) builder ----
+function buildParentSummary() {
+  // Triggers
+  const triggersEl = document.getElementById('ps-triggers');
+  if (triggersEl) {
+    if (S.triggers.length) {
+      triggersEl.innerHTML = S.triggers.map(t =>
+        '<span class="summary-tag summary-tag-coral">' + (TRIGGER_LABELS[t] || t) + '</span>'
+      ).join('');
+    } else {
+      triggersEl.textContent = 'No triggers selected.';
+    }
+  }
+
+  // Body parts
+  const bodyEl = document.getElementById('ps-body');
+  if (bodyEl) {
+    const parts = Object.keys(S.bodyParts);
+    if (parts.length) {
+      bodyEl.innerHTML = parts.map(p =>
+        '<span class="summary-tag">' + p + '</span>'
+      ).join('');
+    } else {
+      bodyEl.textContent = 'No areas selected.';
+    }
+  }
+
+  // Safe sentence
+  const sentenceEl = document.getElementById('ps-sentence');
+  if (sentenceEl) {
+    sentenceEl.textContent = S.safeSentence
+      ? '"' + S.safeSentence + '"'
+      : 'Not yet selected.';
+  }
+
+  // Brave ladder rung 1
+  const rungEl = document.getElementById('ps-rung');
+  if (rungEl) {
+    rungEl.textContent = S.rungs[0]
+      ? '"' + S.rungs[0] + '"'
+      : 'Not yet filled in.';
+  }
+
+  // Trusted adult
+  const adultEl = document.getElementById('ps-adult');
+  if (adultEl) {
+    adultEl.textContent = S.trustedAdult || 'Not yet named.';
+  }
+}
+
+// ---- P8: Certificate strength statement ----
+function getCertStrength() {
+  const braveChoices = Object.values(S.scenarioChoices).filter(v => v === 'brave').length;
+  const smallChoices = Object.values(S.scenarioChoices).filter(v => v === 'small').length;
+  if (braveChoices >= 3) return 'Shows courage under pressure';
+  if (smallChoices >= 2) return 'Thinks carefully before acting';
+  if (S.triggers.length >= 5) return 'Deeply self-aware';
+  if (S.committed) return 'Ready to take brave steps';
+  return 'Completed a challenging journey';
+}
+
+// S35 already handled inside onScreenEnter above
+
+// Strength badge now built directly inside buildCertificate above
+
+// ---- Update page counter to show /35 (handled in updateChrome) ----
+// updateChrome already updates page-num; just patch page-counter text
+function updatePageCounter() {
+  const pc = document.getElementById('page-counter');
+  if (pc) pc.textContent = 'Page ' + S.current + ' of 35';
+}
+
+// ---- Add S35 to menu phase ranges ----
+PHASE_RANGES[6].end = 35;
+
+// Gate hint opacity is now handled inside updateNextState directly (patched below)
+
+</script>
 </body>
 </html>
